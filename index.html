@@ -86,15 +86,24 @@
             margin-bottom: 5px;
         }
 
+        /* Prenda Oculta y Revelada */
         .prenda-text {
             font-size: 1.1rem;
-            color: #d63384;
-            background: #ffe6ea;
+            color: #7a5c61;
+            background: #f0f0f0;
             padding: 10px 15px;
             border-radius: 10px;
             margin-bottom: 15px;
             font-weight: bold;
             width: 90%;
+            border: 1px dashed #ccc;
+            transition: all 0.5s ease;
+        }
+
+        .prenda-text.revealed {
+            color: #d63384;
+            background: #ffe6ea;
+            border: 1px solid #ffb3c6;
         }
 
         /* Estilos del Poema */
@@ -127,6 +136,7 @@
             max-width: 250px;
             text-transform: uppercase;
             margin-bottom: 15px;
+            display: none; 
         }
 
         .key-input:focus { border-color: #d63384; }
@@ -142,6 +152,7 @@
             cursor: pointer;
             transition: 0.3s;
             font-family: 'Lora', serif;
+            display: none; 
         }
 
         .key-btn:hover { background: #666; }
@@ -190,6 +201,7 @@
             border-radius: 10px;
             border: 1px solid #ffb3c6;
             animation: fadeIn 0.5s ease-in;
+            text-align: justify;
         }
 
         .robux-gift {
@@ -200,7 +212,7 @@
             text-align: center;
             font-weight: bold;
             color: #d63384;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1);
         }
 
@@ -227,7 +239,7 @@
     <div class="container">
         <div class="title-love">TE AMO MARIAN</div>
         <div class="subtitle">
-            Esta carta se lee en 7 días. Para abrir cada candado vas a tener que hablarme y cumplir la <strong>"prenda"</strong> del día. Si la cumplís, te doy la clave secreta. 😏💌
+            Esta carta se lee a lo largo de 7 días. Para abrir el candado de cada fecha vas a tener que cumplir la <strong>"prenda"</strong> del día. Ojo, los mensajes y prendas recién se revelan a las <strong>17:00 hs</strong>. 😏💌
         </div>
 
         <div id="levels-container">
@@ -235,10 +247,10 @@
             <!-- DIA 1 -->
             <div class="level-box locked" id="level-0">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 1</div>
-                    <div class="prenda-text">📌 Prenda: Pasarme el TikTok que más te guste o te haya hecho reír hoy.</div>
+                    <div class="padlock-title">🔒 Día 1 (22/08)</div>
+                    <div class="prenda-text" id="prenda-0" data-prenda="📌 Prenda: Pasarme el TikTok que más te guste o te haya hecho reír hoy.">Cargando fecha...</div>
                     <input type="text" id="input-0" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(0)">Desbloquear</button>
+                    <button class="key-btn" id="btn-0" onclick="tryUnlock(0)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -255,10 +267,10 @@
             <!-- DIA 2 -->
             <div class="level-box locked" id="level-1">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 2</div>
-                    <div class="prenda-text">📌 Prenda: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.</div>
+                    <div class="padlock-title">🔒 Día 2 (23/08)</div>
+                    <div class="prenda-text" id="prenda-1" data-prenda="📌 Prenda: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.">Cargando fecha...</div>
                     <input type="text" id="input-1" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(1)">Desbloquear</button>
+                    <button class="key-btn" id="btn-1" onclick="tryUnlock(1)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -275,10 +287,10 @@
             <!-- DIA 3 -->
             <div class="level-box locked" id="level-2">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 3</div>
-                    <div class="prenda-text">📌 Prenda: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.</div>
+                    <div class="padlock-title">🔒 Día 3 (24/08)</div>
+                    <div class="prenda-text" id="prenda-2" data-prenda="📌 Prenda: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.">Cargando fecha...</div>
                     <input type="text" id="input-2" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(2)">Desbloquear</button>
+                    <button class="key-btn" id="btn-2" onclick="tryUnlock(2)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -295,10 +307,10 @@
             <!-- DIA 4 -->
             <div class="level-box locked" id="level-3">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 4</div>
-                    <div class="prenda-text">📌 Prenda: Mandarme un audio contándome qué fue lo mejor de tu día.</div>
+                    <div class="padlock-title">🔒 Día 4 (25/08)</div>
+                    <div class="prenda-text" id="prenda-3" data-prenda="📌 Prenda: Mandarme un audio contándome qué fue lo mejor de tu día.">Cargando fecha...</div>
                     <input type="text" id="input-3" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(3)">Desbloquear</button>
+                    <button class="key-btn" id="btn-3" onclick="tryUnlock(3)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -315,10 +327,10 @@
             <!-- DIA 5 -->
             <div class="level-box locked" id="level-4">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 5</div>
-                    <div class="prenda-text">📌 Prenda: Jugar una partida conmigo (al juego que quieras) y ganarla.</div>
+                    <div class="padlock-title">🔒 Día 5 (26/08)</div>
+                    <div class="prenda-text" id="prenda-4" data-prenda="📌 Prenda: Jugar una partida conmigo (al juego que quieras) y ganarla.">Cargando fecha...</div>
                     <input type="text" id="input-4" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(4)">Desbloquear</button>
+                    <button class="key-btn" id="btn-4" onclick="tryUnlock(4)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -335,10 +347,10 @@
             <!-- DIA 6 -->
             <div class="level-box locked" id="level-5">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 6</div>
-                    <div class="prenda-text">📌 Prenda: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.</div>
+                    <div class="padlock-title">🔒 Día 6 (27/08)</div>
+                    <div class="prenda-text" id="prenda-5" data-prenda="📌 Prenda: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.">Cargando fecha...</div>
                     <input type="text" id="input-5" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(5)">Desbloquear</button>
+                    <button class="key-btn" id="btn-5" onclick="tryUnlock(5)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -355,10 +367,10 @@
             <!-- DIA 7 -->
             <div class="level-box locked" id="level-6">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Día 7</div>
-                    <div class="prenda-text">📌 Prenda: Responder con total sinceridad a una pregunta que te voy a hacer por chat.</div>
+                    <div class="padlock-title">🔒 Día 7 (28/08)</div>
+                    <div class="prenda-text" id="prenda-6" data-prenda="📌 Prenda: Responder con total sinceridad a una pregunta que te voy a hacer por chat.">Cargando fecha...</div>
                     <input type="text" id="input-6" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(6)">Desbloquear</button>
+                    <button class="key-btn" id="btn-6" onclick="tryUnlock(6)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -370,10 +382,13 @@
                     <div class="poem-divider">❧ ♥ ☙</div>
                     Pero bueno, de nuevo, no te digo todo este testamento para exigirte una respuesta ahora ya. Entiendo re bien dónde estamos parados hoy y acepto totalmente lo que me dijiste. Lo único que realmente me dolería en el alma, lo que de verdad me destrozaría, es que toda esta sinceridad haga que te alejes. Sos mi amiga, te quiero muchísimo, Marian, y me encantaría que algún día nos diéramos esa oportunidad de ser algo más. Pero mientras tanto, sigamos como venimos, que me hacés re bien.<br><br>
                     <strong>Te amo negrita, att: Pedro ahreeee. No me bloquees, ¿ok?</strong><br>
-                    <span style="font-size: 0.9rem; color: #7a5c61;">(Y perdón si en estos días casi no te contesto, estoy a full haciendo mi curso de rescatista y ando a mil, pero te tengo todo el día en mi cabeza).</span>
+                    <span style="font-size: 0.9rem; color: #7a5c61;">(Y perdón si en estos días casi no te contesto, estoy a full haciendo mi curso de rescatista y ando a mil, pero te tengo todo el día en mi cabeza).</span><br><br>
+                    
+                    <strong>Pero antes de que aprietes cualquier botón, quiero aclararte algo:</strong> no estás para nada obligada a decir que sí. Si aceptás, mi propuesta es simplemente intentar ser "algo sin ser nada", dejar que todo vaya fluyendo. Cada uno le dará el título que quiera, pero manteniendo una cierta exclusividad para conocernos mejor. Y quedate tranquila que, si algún día vemos que no funciona, te prometo que vamos a seguir siendo los grandes amigos de siempre.<br><br>
+                    Y un último detalle... luego de leer todo, si aceptás mi propuesta, tengo una pequeña sorpresa preparada que sé que te va a gustar (tiene un valor de 30 dólares) y la vas a poder canjear. 😏
                     
                     <div class="decision-box" id="decision-box">
-                        <p>Llegaste al final del Día 7. Después de leer todo esto... ¿Me darías la chance de intentar ser algo más?</p>
+                        <p>Llegaste al final del Día 7. Después de leer todo esto... ¿Me darías la chance de intentarlo?</p>
                         <button class="btn-yes" onclick="acceptProposal()">Sí, me animo</button>
                         <button class="btn-no" onclick="declineProposal()">Prefiero que seamos amigos</button>
                         <div id="final-key-reveal"></div>
@@ -382,11 +397,12 @@
             </div>
 
             <!-- SORPRESA FINAL -->
-            <div class="level-box locked" id="level-7">
+            <div class="level-box locked" id="level-7" style="display: none;">
                 <div class="locked-view">
                     <div class="padlock-title">🎁 Sorpresa Final</div>
-                    <input type="text" id="input-7" class="key-input" placeholder="CLAVE DE ACEPTACIÓN">
-                    <button class="key-btn" onclick="tryUnlock(7)">Abrir regalo</button>
+                    <div class="prenda-text revealed" id="prenda-7">📌 Prenda: Solo tenés que haber aceptado la propuesta.</div>
+                    <input type="text" id="input-7" class="key-input" placeholder="CLAVE DE ACEPTACIÓN" style="display:block;">
+                    <button class="key-btn" id="btn-7" onclick="tryUnlock(7)" style="display:block;">Abrir regalo</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -397,37 +413,108 @@
                     </div>
                     <div class="poem-divider">❧ ♥ ☙</div>
                     <div class="robux-gift">
-                        ¡Gracias por animarte! 🥰 <br><br>
-                        Como llegaste hasta acá y aceptaste, te ganaste una sorpresa. Tenés <strong>1000 Robux</strong> esperándote. Ya los tengo separados para vos para que te compres lo que quieras en Roblox. Hablame y te los paso. 💸💙
+                        ¡Gracias por animarte y confiar en mí! 🥰 <br><br>
+                        Te prometo de corazón que no te voy a defraudar y que la vamos a pasar increíble. Gracias infinitas por tomarte el tiempo de seguirme el juego durante toda esta semana, espero que lo hayas disfrutado un montón.<br><br>
+                        Como llegaste hasta acá y aceptaste, te ganaste tu sorpresa: tenés <strong>1000 Robux</strong> esperándote. Ya los tengo separados para vos para que te compres lo que quieras en Roblox. Hablame y te los paso. 💸💙
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Botón para reiniciar prueba (BORRAR ANTES DE ENVIAR A ELLA) -->
-        <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear prueba</button>
+        <!-- Botón para reiniciar prueba (Solo visible para vos) -->
+        <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear progreso</button>
 
     </div>
 
     <script>
-        // TUS CLAVES SECRETAS PARA LOS 7 DÍAS YA CONFIGURADAS
-        const validKeys = ["SONRISA", "MELODIA", "SECRETO", "TUVOZ", "VICTORIA", "HERMOSA", "VALIENTE", "ACEPTO"];
+        // MODO_PRUEBA arranca en 'false' para que esté bloqueado para ella
+        let MODO_PRUEBA = false; 
+
+        // LAS CLAVES SECRETAS
+        const validKeys = ["SONRISA", "MELODIA", "SECRETO", "TUVOZ", "VICTORIA", "HERMOSA", "VALIENTE", "TE AMO"];
+        
+        // FECHAS OBJETIVO PARA CADA DÍA
+        const targetDates = [
+            "2026-08-22", // Día 1
+            "2026-08-23", // Día 2
+            "2026-08-24", // Día 3
+            "2026-08-25", // Día 4
+            "2026-08-26", // Día 5
+            "2026-08-27", // Día 6
+            "2026-08-28"  // Día 7
+        ];
+
         let unlockedLevel = parseInt(localStorage.getItem('marianLevel')) || 0;
+        let currentDateStr = "";
+        let currentHour = 0;
+
+        function formatearFecha(fechaGuiones) {
+            const partes = fechaGuiones.split('-');
+            return partes[2] + "/" + partes[1];
+        }
+
+        // Obtener la fecha y hora real
+        function chequearHoraGlobal() {
+            if (MODO_PRUEBA) {
+                currentDateStr = "2099-12-31"; 
+                currentHour = 18;
+                renderLevels();
+                return;
+            }
+
+            fetch('https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires')
+                .then(response => response.json())
+                .then(data => {
+                    const realDate = new Date(data.datetime);
+                    currentDateStr = realDate.getFullYear() + "-" + 
+                                    String(realDate.getMonth() + 1).padStart(2, '0') + "-" + 
+                                    String(realDate.getDate()).padStart(2, '0');
+                    currentHour = realDate.getHours();
+                    renderLevels();
+                })
+                .catch(error => {
+                    console.log("Error de red", error);
+                    alert("Por favor, conectate a internet para que funcione la página.");
+                });
+        }
 
         function renderLevels() {
             for (let i = 0; i <= 7; i++) {
                 const box = document.getElementById('level-' + i);
-                if(box) {
-                    box.classList.remove('locked', 'unlocked', 'active-lock');
+                const prendaEl = document.getElementById('prenda-' + i);
+                const inputEl = document.getElementById('input-' + i);
+                const btnEl = document.getElementById('btn-' + i);
 
-                    if (i < unlockedLevel) {
-                        box.classList.add('unlocked');
-                    } else {
-                        box.classList.add('locked');
-                        if (i === unlockedLevel) {
-                            box.classList.add('active-lock');
+                if(!box) continue;
+
+                box.classList.remove('locked', 'unlocked', 'active-lock');
+
+                if (i < unlockedLevel) {
+                    box.classList.add('unlocked');
+                    if(i === 7) box.style.display = 'block';
+                } else {
+                    box.classList.add('locked');
+                    
+                    if (i === unlockedLevel) {
+                        box.classList.add('active-lock');
+                        
+                        if (i < 7) {
+                            if (!MODO_PRUEBA && currentDateStr < targetDates[i]) {
+                                prendaEl.innerHTML = "⏳ Este candado recién se habilita el " + formatearFecha(targetDates[i]) + " a las 17:00 hs.";
+                            } else if (!MODO_PRUEBA && currentDateStr === targetDates[i] && currentHour < 17) {
+                                prendaEl.innerHTML = "⏳ La prenda se revelará HOY a las 17:00 hs.";
+                            } else {
+                                prendaEl.innerHTML = prendaEl.getAttribute('data-prenda');
+                                prendaEl.classList.add('revealed');
+                            }
+                            
+                            // Siempre mostramos el input para poder usar la clave maestra
+                            inputEl.style.display = 'block';
+                            btnEl.style.display = 'block';
                         }
+                    } else if (i > unlockedLevel && i < 7) {
+                        prendaEl.innerHTML = "⏳ Tenés que desbloquear el día anterior primero.";
                     }
                 }
             }
@@ -452,52 +539,62 @@
                 return;
             }
 
-            // SISTEMA ANTI-TRAMPAS (Para activarlo, borrá las // de abajo cuando ya no quieras testear)
-            fetch('https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires')
-                .then(response => response.json())
-                .then(data => {
-                    const realDate = new Date(data.datetime);
-                    const currentHour = realDate.getHours();
+            // CLAVE MAESTRA APOLO PARA VOS (Activa el Modo Dios)
+            if (inputVal === "APOLO") {
+                MODO_PRUEBA = true;
+                alert("🚀 ¡Modo Dios Activado! Fechas desbloqueadas. Ahora podés probar todas las claves reales.");
+                inputElement.value = '';
+                chequearHoraGlobal();
+                return;
+            }
 
-                    // if(currentHour !== 23 && targetLevel < 7) {
-                    //     alert("Ey tramposa. Solo podés usar las claves entre las 23:00 y las 23:59 hs. ¡Paciencia para el próximo día! ⏳");
-                    //     return;
-                    // }
+            // Validación de fecha para ella
+            if (!MODO_PRUEBA && targetLevel < 7) {
+                if (currentDateStr < targetDates[targetLevel] || (currentDateStr === targetDates[targetLevel] && currentHour < 17)) {
+                    alert("¡No hagas trampa! Todavía no es el momento de abrir este candado. ⏳");
+                    return;
+                }
+            }
 
-                    if(inputVal === validKeys[targetLevel]) {
-                        unlockedLevel++;
-                        localStorage.setItem('marianLevel', unlockedLevel);
-                        inputElement.value = '';
-                        renderLevels();
-                        
-                        setTimeout(() => {
-                            const nextLevelBox = document.getElementById('level-' + targetLevel);
-                            if(nextLevelBox) {
-                                nextLevelBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }
-                        }, 300);
-
-                    } else {
-                        alert("Esa clave no es correcta. ¡Asegurate de haber cumplido la prenda y escribila bien! 🕵️‍♀️");
+            if(inputVal === validKeys[targetLevel]) {
+                unlockedLevel++;
+                localStorage.setItem('marianLevel', unlockedLevel);
+                inputElement.value = '';
+                
+                if(targetLevel === 7) {
+                    document.getElementById('level-7').style.display = 'block';
+                }
+                
+                renderLevels();
+                
+                setTimeout(() => {
+                    const nextLevelBox = document.getElementById('level-' + targetLevel);
+                    if(nextLevelBox) {
+                        nextLevelBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
-                })
-                .catch(error => {
-                    alert("Error verificando la hora. Revisá tu conexión a internet.");
-                });
+                }, 300);
+
+            } else {
+                alert("Esa clave no es correcta. ¡Asegurate de haberla escrito bien! 🕵️‍♀️");
+            }
         }
 
         function acceptProposal() {
             const revealBox = document.getElementById('final-key-reveal');
             revealBox.style.display = 'block';
-            revealBox.innerHTML = "¡Qué linda! 😍 Copiá esta llave secreta y ponela en el último candado de abajo para ver tu sorpresa: <strong>ACEPTO</strong>";
+            revealBox.style.color = "#d63384";
+            revealBox.style.background = "#fff0f5";
+            revealBox.innerHTML = "¡Qué linda! 😍 Copiá esta clave y ponela en el candado final de abajo para ver tu sorpresa: <strong>TE AMO</strong>";
+            document.getElementById('level-7').style.display = 'block';
         }
 
         function declineProposal() {
             const revealBox = document.getElementById('final-key-reveal');
             revealBox.style.display = 'block';
-            revealBox.style.color = "#7a5c61";
+            revealBox.style.color = "#4a4a4a";
             revealBox.style.background = "#f0f0f0";
-            revealBox.innerHTML = "Entiendo y respeto tu decisión, no pasa nada. ¡Te quiero igual amiga! ❤️";
+            revealBox.innerHTML = "Entiendo y respeto totalmente tu decisión. De verdad, no pasa nada y me quedo súper tranquilo de haberte sido sincero. Gracias por tomarte el tiempo de leer todo esto y seguirme el juego estos días. ¡Te quiero muchísimo y nuestra amistad sigue intacta, amiga! ❤️";
+            document.getElementById('level-7').style.display = 'none';
         }
 
         function reiniciarPrueba() {
@@ -507,13 +604,28 @@
             inputs.forEach(input => input.value = '');
             const revealBox = document.getElementById('final-key-reveal');
             if(revealBox) revealBox.style.display = 'none';
+            
+            for(let i=0; i<7; i++){
+                const prendaEl = document.getElementById('prenda-'+i);
+                if(prendaEl) {
+                    prendaEl.classList.remove('revealed');
+                    prendaEl.innerHTML = "Cargando fecha...";
+                }
+                const inputEl = document.getElementById('input-'+i);
+                const btnEl = document.getElementById('btn-'+i);
+                if(inputEl) inputEl.style.display = 'none';
+                if(btnEl) btnEl.style.display = 'none';
+            }
+
             const decisionBox = document.getElementById('decision-box');
             if(decisionBox) decisionBox.style.display = 'block';
-            renderLevels();
+            document.getElementById('level-7').style.display = 'none';
+            
+            chequearHoraGlobal(); 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        renderLevels();
+        chequearHoraGlobal();
     </script>
 </body>
 </html>
