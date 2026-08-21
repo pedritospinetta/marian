@@ -298,7 +298,7 @@
             <div class="level-box locked" id="level-7" style="display: none;">
                 <div class="locked-view">
                     <div class="padlock-title">🎁 Sorpresa Final</div>
-                    <div class="prenda-text revealed" id="prenda-7">📌 Prenda: Solo tenés que haber aceptado la propuesta.</div>
+                    <div class="prenda-text revealed" id="prenda-7">📌 Prenda: Solo tenés que haber aceptado la propuesta y pedirme la clave a mí.</div>
                     <input type="text" id="input-7" class="key-input" placeholder="CLAVE DE ACEPTACIÓN" style="display:block;">
                     <button class="key-btn" id="btn-7" onclick="tryUnlock(7)" style="display:block;">Abrir regalo</button>
                 </div>
@@ -467,7 +467,7 @@
             revealBox.style.display = 'block';
             revealBox.style.color = "#d63384";
             revealBox.style.background = "#fff0f5";
-            revealBox.innerHTML = "¡Qué linda! 😍 Copiá esta llave secreta y ponela en el candado final de abajo para ver tu sorpresa: <strong>TE AMO</strong>";
+            revealBox.innerHTML = "¡Qué linda! 😍 Para poder ver tu sorpresa, <strong>mandame un mensaje avisándome que aceptaste</strong> y te paso la última clave para abrir el candado de abajo.";
             document.getElementById('level-7').style.display = 'block';
         }
 
@@ -514,5 +514,3 @@
 
         chequearHoraGlobal();
     </script>
-</body>
-</html>
