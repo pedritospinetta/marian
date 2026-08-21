@@ -422,14 +422,14 @@
 
         </div>
 
-        <!-- Botón para reiniciar prueba (Solo visible para vos) -->
-        <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear progreso</button>
+        <!-- Botón para reiniciar prueba (BORRAR ANTES DE ENVIAR A ELLA) -->
+        <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear progreso y borrar APOLO</button>
 
     </div>
 
     <script>
-        // MODO_PRUEBA arranca en 'false' para que esté bloqueado para ella
-        let MODO_PRUEBA = false; 
+        // Leemos si el MODO_PRUEBA (APOLO) está guardado en el navegador
+        let MODO_PRUEBA = localStorage.getItem('marianModoPrueba') === 'true'; 
 
         // LAS CLAVES SECRETAS
         const validKeys = ["SONRISA", "MELODIA", "SECRETO", "TUVOZ", "VICTORIA", "HERMOSA", "VALIENTE", "TE AMO"];
@@ -509,7 +509,7 @@
                                 prendaEl.classList.add('revealed');
                             }
                             
-                            // Siempre mostramos el input para poder usar la clave maestra
+                            // SIEMPRE mostramos el input para que vos puedas escribir APOLO
                             inputEl.style.display = 'block';
                             btnEl.style.display = 'block';
                         }
@@ -539,10 +539,11 @@
                 return;
             }
 
-            // CLAVE MAESTRA APOLO PARA VOS (Activa el Modo Dios)
+            // CLAVE MAESTRA APOLO PARA VOS (Activa el Modo Dios y lo guarda)
             if (inputVal === "APOLO") {
                 MODO_PRUEBA = true;
-                alert("🚀 ¡Modo Dios Activado! Fechas desbloqueadas. Ahora podés probar todas las claves reales.");
+                localStorage.setItem('marianModoPrueba', 'true');
+                alert("🚀 ¡Modo Dios Activado! Fechas desbloqueadas. Ahora podés apretar F5 tranquilo, el Modo Dios quedó guardado. Ya podés probar todas las claves reales.");
                 inputElement.value = '';
                 chequearHoraGlobal();
                 return;
@@ -584,7 +585,7 @@
             revealBox.style.display = 'block';
             revealBox.style.color = "#d63384";
             revealBox.style.background = "#fff0f5";
-            revealBox.innerHTML = "¡Qué linda! 😍 Copiá esta clave y ponela en el candado final de abajo para ver tu sorpresa: <strong>TE AMO</strong>";
+            revealBox.innerHTML = "¡Qué linda! 😍 Copiá esta llave secreta y ponela en el candado final de abajo para ver tu sorpresa: <strong>TE AMO</strong>";
             document.getElementById('level-7').style.display = 'block';
         }
 
@@ -598,8 +599,12 @@
         }
 
         function reiniciarPrueba() {
+            // Borramos el progreso y el Modo Dios
             localStorage.removeItem('marianLevel');
+            localStorage.removeItem('marianModoPrueba');
             unlockedLevel = 0;
+            MODO_PRUEBA = false;
+            
             const inputs = document.querySelectorAll('.key-input');
             inputs.forEach(input => input.value = '');
             const revealBox = document.getElementById('final-key-reveal');
@@ -621,10 +626,12 @@
             if(decisionBox) decisionBox.style.display = 'block';
             document.getElementById('level-7').style.display = 'none';
             
+            alert("¡Todo reseteado! Se borró el progreso y el Modo Dios (APOLO) se desactivó.");
             chequearHoraGlobal(); 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Iniciar
         chequearHoraGlobal();
     </script>
 </body>
