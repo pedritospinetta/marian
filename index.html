@@ -83,7 +83,18 @@
             font-size: 1.5rem;
             color: #888;
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .prenda-text {
+            font-size: 1.1rem;
+            color: #d63384;
+            background: #ffe6ea;
+            padding: 10px 15px;
+            border-radius: 10px;
             margin-bottom: 15px;
+            font-weight: bold;
+            width: 90%;
         }
 
         /* Estilos del Poema */
@@ -216,15 +227,16 @@
     <div class="container">
         <div class="title-love">TE AMO MARIAN</div>
         <div class="subtitle">
-            Esta carta se lee de a poco. Para abrir cada candado vas a tener que hablarme y cumplir una <strong>"prenda"</strong> (pasarme tu canción favorita, contarme un chisme, etc.). Si la cumplís, te doy la clave. 😏💌
+            Esta carta se lee en 7 días. Para abrir cada candado vas a tener que hablarme y cumplir la <strong>"prenda"</strong> del día. Si la cumplís, te doy la clave secreta. 😏💌
         </div>
 
         <div id="levels-container">
             
-            <!-- NIVEL 1 -->
+            <!-- DIA 1 -->
             <div class="level-box locked" id="level-0">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Candado 1</div>
+                    <div class="padlock-title">🔒 Día 1</div>
+                    <div class="prenda-text">📌 Prenda: Pasarme el TikTok que más te guste o te haya hecho reír hoy.</div>
                     <input type="text" id="input-0" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" onclick="tryUnlock(0)">Desbloquear</button>
                 </div>
@@ -240,10 +252,11 @@
                 </div>
             </div>
 
-            <!-- NIVEL 2 -->
+            <!-- DIA 2 -->
             <div class="level-box locked" id="level-1">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Candado 2</div>
+                    <div class="padlock-title">🔒 Día 2</div>
+                    <div class="prenda-text">📌 Prenda: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.</div>
                     <input type="text" id="input-1" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" onclick="tryUnlock(1)">Desbloquear</button>
                 </div>
@@ -259,12 +272,33 @@
                 </div>
             </div>
 
-            <!-- NIVEL 3 -->
+            <!-- DIA 3 -->
             <div class="level-box locked" id="level-2">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Candado 3</div>
+                    <div class="padlock-title">🔒 Día 3</div>
+                    <div class="prenda-text">📌 Prenda: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.</div>
                     <input type="text" id="input-2" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" onclick="tryUnlock(2)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        "No busco a nadie más en esta multitud,<br>
+                        si en tu risa encuentro todo lo que quiero.<br>
+                        Con vos cada charla es a plenitud,<br>
+                        y el tiempo jugando se me hace sincero."
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    Me pediste que intente apagar lo que siento, que con el tiempo deje de gustar de vos para que esto no termine mal. También me dijiste que sentís que no sos para mí y que seguramente voy a encontrar a otra. Pero la verdad es que yo no quiero a otra, ni estoy buscando a nadie más. No me interesa si hay un millón de personas ahí afuera, porque con la que me cago de risa, con la que me paso horas jugando y con la que conecto de esta forma única, es con vos. Para mí, encajás perfecto en lo que quiero y necesito. 
+                </div>
+            </div>
+
+            <!-- DIA 4 -->
+            <div class="level-box locked" id="level-3">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 4</div>
+                    <div class="prenda-text">📌 Prenda: Mandarme un audio contándome qué fue lo mejor de tu día.</div>
+                    <input type="text" id="input-3" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
+                    <button class="key-btn" onclick="tryUnlock(3)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -274,16 +308,17 @@
                         que te encuentro en todo, en cada pavada."
                     </div>
                     <div class="poem-divider">❧ ♥ ☙</div>
-                    Me pediste que intente apagar lo que siento, que con el tiempo deje de gustar de vos para que esto no termine mal. También me dijiste que sentís que no sos para mí y que seguramente voy a encontrar a otra. Pero la verdad es que yo no quiero a otra, ni estoy buscando a nadie más. No me interesa si hay un millón de personas ahí afuera, porque con la que me cago de risa, con la que me paso horas jugando y con la que conecto de esta forma única, es con vos. Para mí, encajás perfecto en lo que quiero y necesito. Es imposible apagar este sentimiento cuando te volviste una persona absolutamente indispensable en mi día a día. Siento que te conozco un montón.
+                    Es imposible apagar este sentimiento cuando te volviste una persona absolutamente indispensable en mi día a día. Me despierto y ya tengo ganas de ver si me mandaste algo o de contarte la primera boludez que me pasó en la mañana. Disfruto como loco cada charla sin sentido, ayudarte en todo lo que necesites y el simple hecho de saber que estás ahí del otro lado. Más allá de que todavía no nos hayamos visto en persona (y hasta que pienses que seguro soy medio feo, jaja, qué sé yo), siento que te conozco un montón.
                 </div>
             </div>
 
-            <!-- NIVEL 4 -->
-            <div class="level-box locked" id="level-3">
+            <!-- DIA 5 -->
+            <div class="level-box locked" id="level-4">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Candado 4</div>
-                    <input type="text" id="input-3" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(3)">Desbloquear</button>
+                    <div class="padlock-title">🔒 Día 5</div>
+                    <div class="prenda-text">📌 Prenda: Jugar una partida conmigo (al juego que quieras) y ganarla.</div>
+                    <input type="text" id="input-4" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
+                    <button class="key-btn" onclick="tryUnlock(4)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -293,16 +328,37 @@
                         y ver, paso a paso, qué nos hace feliz."
                     </div>
                     <div class="poem-divider">❧ ♥ ☙</div>
-                    Por eso, cuando te pregunté qué “impondrías” en una relación y te hablé de "adaptarme" a lo que vos me pidieras, no quiero que pienses que estaba flasheando casamiento. No era para apurarte a un compromiso formal de la nada. Mi intención era simplemente abrir una puerta. Darnos la chance real de ser algo más, de empezar a vernos desde otro lugar, de tratarnos distinto. Imaginate lo copado que sería simplemente disfrutar el uno del otro, compartir momentos, dejarnos llevar un poco más, con total libertad. Todo a tu ritmo y sin presiones de ningún tipo.
+                    Por eso, cuando te pregunté qué “impondrías” en una relación y te hablé de "adaptarme" a lo que vos me pidieras, no quiero que pienses que estaba flasheando casamiento. No era para apurarte a un compromiso formal de la nada. Mi intención era simplemente abrir una puerta. Darnos la chance real de ser algo más, de empezar a vernos desde otro lugar, de tratarnos distinto. 
                 </div>
             </div>
 
-            <!-- NIVEL 5 -->
-            <div class="level-box locked" id="level-4">
+            <!-- DIA 6 -->
+            <div class="level-box locked" id="level-5">
                 <div class="locked-view">
-                    <div class="padlock-title">🔒 Candado 5</div>
-                    <input type="text" id="input-4" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
-                    <button class="key-btn" onclick="tryUnlock(4)">Desbloquear</button>
+                    <div class="padlock-title">🔒 Día 6</div>
+                    <div class="prenda-text">📌 Prenda: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.</div>
+                    <input type="text" id="input-5" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
+                    <button class="key-btn" onclick="tryUnlock(5)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        "Que las risas fluyan y el tiempo se pare,<br>
+                        sin tantas presiones, sin nada que atar.<br>
+                        Dejar que este puente por fin se repare,<br>
+                        y ver a qué mundo nos quiere llevar."
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    Imaginate lo copado que sería simplemente disfrutar el uno del otro, compartir momentos, dejarnos llevar un poco más, con total libertad. Todo a tu ritmo y sin presiones de ningún tipo. Cero estrés, cero planteos raros. Que las cosas fluyan entre los dos de manera natural, sin forzar absolutamente nada, pero también sin reprimir lo que nos pasa. Siento que la pasaríamos increíble juntos si nos damos el permiso de intentarlo sin tantas reglas.
+                </div>
+            </div>
+
+            <!-- DIA 7 -->
+            <div class="level-box locked" id="level-6">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 7</div>
+                    <div class="prenda-text">📌 Prenda: Responder con total sinceridad a una pregunta que te voy a hacer por chat.</div>
+                    <input type="text" id="input-6" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
+                    <button class="key-btn" onclick="tryUnlock(6)">Desbloquear</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -312,12 +368,12 @@
                         pero soñar juntos... sería un honor."
                     </div>
                     <div class="poem-divider">❧ ♥ ☙</div>
-                    Pero bueno, de nuevo, no te digo todo este testamento para exigirte una respuesta ahora ya, ni para que sientas que te estoy empujando a tomar una decisión. Posta que no. Entiendo re bien dónde estamos parados hoy y acepto totalmente lo que me dijiste. Lo único que realmente me dolería en el alma, lo que de verdad me destrozaría, es que toda esta sinceridad haga que te alejes. Sos mi amiga, te quiero muchísimo, Marian, y me encantaría que algún día nos diéramos esa oportunidad de ser algo más. Pero mientras tanto, sigamos como venimos, que me hacés re bien.<br><br>
+                    Pero bueno, de nuevo, no te digo todo este testamento para exigirte una respuesta ahora ya. Entiendo re bien dónde estamos parados hoy y acepto totalmente lo que me dijiste. Lo único que realmente me dolería en el alma, lo que de verdad me destrozaría, es que toda esta sinceridad haga que te alejes. Sos mi amiga, te quiero muchísimo, Marian, y me encantaría que algún día nos diéramos esa oportunidad de ser algo más. Pero mientras tanto, sigamos como venimos, que me hacés re bien.<br><br>
                     <strong>Te amo negrita, att: Pedro ahreeee. No me bloquees, ¿ok?</strong><br>
                     <span style="font-size: 0.9rem; color: #7a5c61;">(Y perdón si en estos días casi no te contesto, estoy a full haciendo mi curso de rescatista y ando a mil, pero te tengo todo el día en mi cabeza).</span>
                     
                     <div class="decision-box" id="decision-box">
-                        <p>Llegaste al final. Después de leer todo esto... ¿Me darías la chance de intentar ser algo más?</p>
+                        <p>Llegaste al final del Día 7. Después de leer todo esto... ¿Me darías la chance de intentar ser algo más?</p>
                         <button class="btn-yes" onclick="acceptProposal()">Sí, me animo</button>
                         <button class="btn-no" onclick="declineProposal()">Prefiero que seamos amigos</button>
                         <div id="final-key-reveal"></div>
@@ -325,12 +381,12 @@
                 </div>
             </div>
 
-            <!-- NIVEL 6 (Sorpresa Final) -->
-            <div class="level-box locked" id="level-5">
+            <!-- SORPRESA FINAL -->
+            <div class="level-box locked" id="level-7">
                 <div class="locked-view">
                     <div class="padlock-title">🎁 Sorpresa Final</div>
-                    <input type="text" id="input-5" class="key-input" placeholder="CLAVE DE ACEPTACIÓN">
-                    <button class="key-btn" onclick="tryUnlock(5)">Abrir regalo</button>
+                    <input type="text" id="input-7" class="key-input" placeholder="CLAVE DE ACEPTACIÓN">
+                    <button class="key-btn" onclick="tryUnlock(7)">Abrir regalo</button>
                 </div>
                 <div class="unlocked-view">
                     <div class="poem">
@@ -349,33 +405,34 @@
 
         </div>
 
-        <!-- Botón para reiniciar prueba (BORRAR ANTES DE ENVIAR) -->
+        <!-- Botón para reiniciar prueba (BORRAR ANTES DE ENVIAR A ELLA) -->
         <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear prueba</button>
 
     </div>
 
     <script>
-        // TUS CLAVES SECRETAS
-        const validKeys = ["CLAVE1", "CLAVE2", "CLAVE3", "CLAVE4", "CLAVE5", "ACEPTO"];
+        // TUS CLAVES SECRETAS PARA LOS 7 DÍAS YA CONFIGURADAS
+        const validKeys = ["SONRISA", "MELODIA", "SECRETO", "TUVOZ", "VICTORIA", "HERMOSA", "VALIENTE", "ACEPTO"];
         let unlockedLevel = parseInt(localStorage.getItem('marianLevel')) || 0;
 
         function renderLevels() {
-            for (let i = 0; i <= 5; i++) {
+            for (let i = 0; i <= 7; i++) {
                 const box = document.getElementById('level-' + i);
-                
-                box.classList.remove('locked', 'unlocked', 'active-lock');
+                if(box) {
+                    box.classList.remove('locked', 'unlocked', 'active-lock');
 
-                if (i < unlockedLevel) {
-                    box.classList.add('unlocked');
-                } else {
-                    box.classList.add('locked');
-                    if (i === unlockedLevel) {
-                        box.classList.add('active-lock');
+                    if (i < unlockedLevel) {
+                        box.classList.add('unlocked');
+                    } else {
+                        box.classList.add('locked');
+                        if (i === unlockedLevel) {
+                            box.classList.add('active-lock');
+                        }
                     }
                 }
             }
 
-            if (unlockedLevel > 5) {
+            if (unlockedLevel > 7) {
                 const decisionBox = document.getElementById('decision-box');
                 if (decisionBox) decisionBox.style.display = 'none';
             }
@@ -383,7 +440,7 @@
 
         function tryUnlock(targetLevel) {
             if (targetLevel > unlockedLevel) {
-                alert("¡Epa! Tenés que desbloquear el candado anterior primero. 🔒");
+                alert("¡Epa! Tenés que desbloquear el día anterior primero. 🔒");
                 return;
             }
 
@@ -395,15 +452,15 @@
                 return;
             }
 
-            // SISTEMA ANTI-TRAMPAS (Descomentar las líneas de abajo para activarlo)
+            // SISTEMA ANTI-TRAMPAS (Para activarlo, borrá las // de abajo cuando ya no quieras testear)
             fetch('https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires')
                 .then(response => response.json())
                 .then(data => {
                     const realDate = new Date(data.datetime);
                     const currentHour = realDate.getHours();
 
-                    // if(currentHour !== 23 && targetLevel < 5) {
-                    //     alert("Ey tramposa. Solo podés usar las claves entre las 23:00 y las 23:59 hs. ¡Paciencia! ⏳");
+                    // if(currentHour !== 23 && targetLevel < 7) {
+                    //     alert("Ey tramposa. Solo podés usar las claves entre las 23:00 y las 23:59 hs. ¡Paciencia para el próximo día! ⏳");
                     //     return;
                     // }
 
@@ -414,7 +471,10 @@
                         renderLevels();
                         
                         setTimeout(() => {
-                            document.getElementById('level-' + targetLevel).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            const nextLevelBox = document.getElementById('level-' + targetLevel);
+                            if(nextLevelBox) {
+                                nextLevelBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
                         }, 300);
 
                     } else {
