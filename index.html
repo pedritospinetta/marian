@@ -63,15 +63,8 @@
             transition: all 0.3s ease;
         }
 
-        .level-box.locked {
-            border-color: #ccc;
-            background: #fdfdfd;
-        }
-
-        .level-box.unlocked {
-            border-color: #ffb3c6;
-            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.15);
-        }
+        .level-box.locked { border-color: #ccc; background: #fdfdfd; }
+        .level-box.unlocked { border-color: #ffb3c6; box-shadow: 0 5px 15px rgba(214, 51, 132, 0.15); }
 
         .locked-view { display: flex; flex-direction: column; align-items: center; }
         .unlocked-view { display: none; text-align: justify; font-size: 1.15rem; line-height: 1.8; color: #333; }
@@ -79,82 +72,35 @@
         .level-box.unlocked .locked-view { display: none; }
         .level-box.unlocked .unlocked-view { display: block; animation: fadeIn 1s ease-in; }
 
-        .padlock-title {
-            font-size: 1.5rem;
-            color: #888;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+        .padlock-title { font-size: 1.5rem; color: #888; font-weight: bold; margin-bottom: 5px; }
 
         /* Prenda Oculta y Revelada */
         .prenda-text {
-            font-size: 1.1rem;
-            color: #7a5c61;
-            background: #f0f0f0;
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            width: 90%;
-            border: 1px dashed #ccc;
-            transition: all 0.5s ease;
+            font-size: 1.1rem; color: #7a5c61; background: #f0f0f0;
+            padding: 10px 15px; border-radius: 10px; margin-bottom: 15px;
+            font-weight: bold; width: 90%; border: 1px dashed #ccc; transition: all 0.5s ease;
         }
-
-        .prenda-text.revealed {
-            color: #d63384;
-            background: #ffe6ea;
-            border: 1px solid #ffb3c6;
-        }
+        .prenda-text.revealed { color: #d63384; background: #ffe6ea; border: 1px solid #ffb3c6; }
 
         /* Estilos del Poema */
         .poem {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #d63384;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            text-shadow: 1px 1px 2px rgba(214, 51, 132, 0.1);
+            font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: #d63384;
+            text-align: center; margin-bottom: 20px; line-height: 1.4; text-shadow: 1px 1px 2px rgba(214, 51, 132, 0.1);
         }
-        
-        .poem-divider {
-            color: #ffb3c6;
-            font-size: 1.2rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        .poem-divider { color: #ffb3c6; font-size: 1.2rem; text-align: center; margin-bottom: 20px; }
 
         .key-input {
-            padding: 10px 15px;
-            font-size: 1.1rem;
-            border: 2px solid #ccc;
-            border-radius: 20px;
-            font-family: 'Lora', serif;
-            text-align: center;
-            outline: none;
-            width: 80%;
-            max-width: 250px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: none; 
+            padding: 10px 15px; font-size: 1.1rem; border: 2px solid #ccc;
+            border-radius: 20px; font-family: 'Lora', serif; text-align: center; outline: none;
+            width: 80%; max-width: 250px; text-transform: uppercase; margin-bottom: 15px; display: none; 
         }
-
         .key-input:focus { border-color: #d63384; }
 
         .key-btn {
-            padding: 10px 25px;
-            background: #888;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Lora', serif;
-            display: none; 
+            padding: 10px 25px; background: #888; color: white; border: none;
+            border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            transition: 0.3s; font-family: 'Lora', serif; display: none; 
         }
-
         .key-btn:hover { background: #666; }
         
         .level-box.active-lock .key-btn { background: #d63384; }
@@ -163,69 +109,21 @@
         .level-box.active-lock .padlock-title { color: #d63384; }
 
         /* Sección de Aceptación */
-        .decision-box {
-            background: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px dashed #ffb3c6;
-            margin-top: 30px;
-            text-align: center;
-        }
-
+        .decision-box { background: #fff; padding: 25px; border-radius: 15px; border: 2px dashed #ffb3c6; margin-top: 30px; text-align: center; }
         .decision-box p { font-weight: bold; color: #d63384; font-size: 1.3rem; margin-bottom: 20px; }
 
-        .btn-yes, .btn-no {
-            padding: 12px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Lora', serif;
-        }
-
+        .btn-yes, .btn-no { padding: 12px 25px; margin: 10px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
         .btn-yes { background: #d63384; color: white; }
         .btn-yes:hover { background: #ff4d6d; transform: scale(1.1); box-shadow: 0 5px 15px rgba(214,51,132,0.3); }
         .btn-no { background: #e0e0e0; color: #555; }
         .btn-no:hover { background: #ccc; color: #333; }
 
-        #final-key-reveal {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff0f5;
-            color: #d63384;
-            font-weight: bold;
-            border-radius: 10px;
-            border: 1px solid #ffb3c6;
-            animation: fadeIn 0.5s ease-in;
-            text-align: justify;
-        }
+        #final-key-reveal { display: none; margin-top: 20px; padding: 15px; background: #fff0f5; color: #d63384; font-weight: bold; border-radius: 10px; border: 1px solid #ffb3c6; animation: fadeIn 0.5s ease-in; text-align: justify; }
 
-        .robux-gift {
-            background: #ffe6f2;
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px dashed #d63384;
-            text-align: center;
-            font-weight: bold;
-            color: #d63384;
-            font-size: 1.15rem;
-            box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1);
-        }
+        .robux-gift { background: #ffe6f2; padding: 25px; border-radius: 15px; border: 2px dashed #d63384; text-align: center; font-weight: bold; color: #d63384; font-size: 1.15rem; box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1); }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         @media (max-width: 600px) {
             .container { padding: 25px 15px; }
@@ -248,7 +146,7 @@
             <div class="level-box locked" id="level-0">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 1 (22/08)</div>
-                    <div class="prenda-text" id="prenda-0" data-prenda="📌 Prenda: Pasarme el TikTok que más te guste o te haya hecho reír hoy.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-0" data-prenda="📌 Prenda: Pasarme el TikTok que más te guste o te haya hecho reír hoy.">Cargando...</div>
                     <input type="text" id="input-0" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-0" onclick="tryUnlock(0)">Desbloquear</button>
                 </div>
@@ -268,7 +166,7 @@
             <div class="level-box locked" id="level-1">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 2 (23/08)</div>
-                    <div class="prenda-text" id="prenda-1" data-prenda="📌 Prenda: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-1" data-prenda="📌 Prenda: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.">Cargando...</div>
                     <input type="text" id="input-1" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-1" onclick="tryUnlock(1)">Desbloquear</button>
                 </div>
@@ -288,7 +186,7 @@
             <div class="level-box locked" id="level-2">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 3 (24/08)</div>
-                    <div class="prenda-text" id="prenda-2" data-prenda="📌 Prenda: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-2" data-prenda="📌 Prenda: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.">Cargando...</div>
                     <input type="text" id="input-2" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-2" onclick="tryUnlock(2)">Desbloquear</button>
                 </div>
@@ -308,7 +206,7 @@
             <div class="level-box locked" id="level-3">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 4 (25/08)</div>
-                    <div class="prenda-text" id="prenda-3" data-prenda="📌 Prenda: Mandarme un audio contándome qué fue lo mejor de tu día.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-3" data-prenda="📌 Prenda: Mandarme un audio contándome qué fue lo mejor de tu día.">Cargando...</div>
                     <input type="text" id="input-3" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-3" onclick="tryUnlock(3)">Desbloquear</button>
                 </div>
@@ -328,7 +226,7 @@
             <div class="level-box locked" id="level-4">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 5 (26/08)</div>
-                    <div class="prenda-text" id="prenda-4" data-prenda="📌 Prenda: Jugar una partida conmigo (al juego que quieras) y ganarla.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-4" data-prenda="📌 Prenda: Jugar una partida conmigo (al juego que quieras) y ganarla.">Cargando...</div>
                     <input type="text" id="input-4" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-4" onclick="tryUnlock(4)">Desbloquear</button>
                 </div>
@@ -348,7 +246,7 @@
             <div class="level-box locked" id="level-5">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 6 (27/08)</div>
-                    <div class="prenda-text" id="prenda-5" data-prenda="📌 Prenda: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-5" data-prenda="📌 Prenda: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.">Cargando...</div>
                     <input type="text" id="input-5" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-5" onclick="tryUnlock(5)">Desbloquear</button>
                 </div>
@@ -368,7 +266,7 @@
             <div class="level-box locked" id="level-6">
                 <div class="locked-view">
                     <div class="padlock-title">🔒 Día 7 (28/08)</div>
-                    <div class="prenda-text" id="prenda-6" data-prenda="📌 Prenda: Responder con total sinceridad a una pregunta que te voy a hacer por chat.">Cargando fecha...</div>
+                    <div class="prenda-text" id="prenda-6" data-prenda="📌 Prenda: Responder con total sinceridad a una pregunta que te voy a hacer por chat.">Cargando...</div>
                     <input type="text" id="input-6" class="key-input" placeholder="INGRESA TU CLAVE ACÁ">
                     <button class="key-btn" id="btn-6" onclick="tryUnlock(6)">Desbloquear</button>
                 </div>
@@ -422,13 +320,13 @@
 
         </div>
 
-        <!-- Botón para reiniciar prueba (BORRAR ANTES DE ENVIAR A ELLA) -->
+        <!-- Botón para reiniciar prueba (Solo visible para vos) -->
         <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px;">Resetear progreso y borrar APOLO</button>
 
     </div>
 
     <script>
-        // Leemos si el MODO_PRUEBA (APOLO) está guardado en el navegador
+        // Leer Modo Prueba
         let MODO_PRUEBA = localStorage.getItem('marianModoPrueba') === 'true'; 
 
         // LAS CLAVES SECRETAS
@@ -436,13 +334,7 @@
         
         // FECHAS OBJETIVO PARA CADA DÍA
         const targetDates = [
-            "2026-08-22", // Día 1
-            "2026-08-23", // Día 2
-            "2026-08-24", // Día 3
-            "2026-08-25", // Día 4
-            "2026-08-26", // Día 5
-            "2026-08-27", // Día 6
-            "2026-08-28"  // Día 7
+            "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28"
         ];
 
         let unlockedLevel = parseInt(localStorage.getItem('marianLevel')) || 0;
@@ -454,29 +346,19 @@
             return partes[2] + "/" + partes[1];
         }
 
-        // Obtener la fecha y hora real
+        // Usa la hora de la PC/Celular automáticamente
         function chequearHoraGlobal() {
             if (MODO_PRUEBA) {
                 currentDateStr = "2099-12-31"; 
                 currentHour = 18;
-                renderLevels();
-                return;
+            } else {
+                const realDate = new Date();
+                currentDateStr = realDate.getFullYear() + "-" + 
+                                String(realDate.getMonth() + 1).padStart(2, '0') + "-" + 
+                                String(realDate.getDate()).padStart(2, '0');
+                currentHour = realDate.getHours();
             }
-
-            fetch('https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires')
-                .then(response => response.json())
-                .then(data => {
-                    const realDate = new Date(data.datetime);
-                    currentDateStr = realDate.getFullYear() + "-" + 
-                                    String(realDate.getMonth() + 1).padStart(2, '0') + "-" + 
-                                    String(realDate.getDate()).padStart(2, '0');
-                    currentHour = realDate.getHours();
-                    renderLevels();
-                })
-                .catch(error => {
-                    console.log("Error de red", error);
-                    alert("Por favor, conectate a internet para que funcione la página.");
-                });
+            renderLevels();
         }
 
         function renderLevels() {
@@ -509,7 +391,7 @@
                                 prendaEl.classList.add('revealed');
                             }
                             
-                            // SIEMPRE mostramos el input para que vos puedas escribir APOLO
+                            // Siempre mostramos el input para poder usar la clave maestra
                             inputEl.style.display = 'block';
                             btnEl.style.display = 'block';
                         }
@@ -539,11 +421,11 @@
                 return;
             }
 
-            // CLAVE MAESTRA APOLO PARA VOS (Activa el Modo Dios y lo guarda)
+            // CLAVE MAESTRA APOLO
             if (inputVal === "APOLO") {
                 MODO_PRUEBA = true;
                 localStorage.setItem('marianModoPrueba', 'true');
-                alert("🚀 ¡Modo Dios Activado! Fechas desbloqueadas. Ahora podés apretar F5 tranquilo, el Modo Dios quedó guardado. Ya podés probar todas las claves reales.");
+                alert("🚀 ¡Modo Dios Activado! Ahora la página cree que estamos en el futuro. Ya podés probar todas las claves.");
                 inputElement.value = '';
                 chequearHoraGlobal();
                 return;
@@ -599,7 +481,6 @@
         }
 
         function reiniciarPrueba() {
-            // Borramos el progreso y el Modo Dios
             localStorage.removeItem('marianLevel');
             localStorage.removeItem('marianModoPrueba');
             unlockedLevel = 0;
@@ -614,7 +495,7 @@
                 const prendaEl = document.getElementById('prenda-'+i);
                 if(prendaEl) {
                     prendaEl.classList.remove('revealed');
-                    prendaEl.innerHTML = "Cargando fecha...";
+                    prendaEl.innerHTML = "Cargando...";
                 }
                 const inputEl = document.getElementById('input-'+i);
                 const btnEl = document.getElementById('btn-'+i);
@@ -631,7 +512,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Iniciar
         chequearHoraGlobal();
     </script>
 </body>
