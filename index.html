@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Marian</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Lora', serif; 
+            background: linear-gradient(135deg, #fff0f5 0%, #ffcce0 100%);
+            color: #4a4a4a; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
+
+        .container {
+            max-width: 700px; 
+            width: 90%; 
+            margin: 40px auto; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(214, 51, 132, 0.15); 
+            border: 1px solid #ffb3c6;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title-love { 
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem; 
+            color: #d63384; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 5px rgba(214, 51, 132, 0.2); 
+            animation: pulse 2s infinite;
+        }
+
+        .subtitle {
+            font-size: 1.1rem; 
+            color: #7a5c61;
+            font-style: italic;
+            margin-bottom: 30px;
+            background: #fff0f5;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed #ffb3c6;
+        }
+
+        /* Cajas de Niveles */
+        .level-box {
+            background: #fff;
+            border: 2px solid #ffe6ea;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .level-box.locked { border-color: #ccc; background: #fdfdfd; }
+        .level-box.unlocked { border-color: #ffb3c6; box-shadow: 0 5px 15px rgba(214, 51, 132, 0.15); }
+
+        .locked-view { display: flex; flex-direction: column; align-items: center; }
+        .unlocked-view { display: none; text-align: center; font-size: 1.15rem; line-height: 1.8; color: #333; }
+        
+        .level-box.unlocked .locked-view { display: none; }
+        .level-box.unlocked .unlocked-view { display: block; animation: fadeIn 1s ease-in; }
+
+        .padlock-title { font-size: 1.5rem; color: #888; font-weight: bold; margin-bottom: 5px; }
+
+        /* Retos */
+        .reto-text {
+            font-size: 1.1rem; color: #d63384; background: #ffe6ea;
+            padding: 10px 15px; border-radius: 10px; margin-bottom: 15px;
+            font-weight: bold; width: 90%; border: 1px dashed #ffb3c6; transition: all 0.5s ease;
+        }
+
+        /* Poemas y Frases */
+        .poem {
+            font-family: 'Dancing Script', cursive; font-size: 2rem; color: #d63384;
+            text-align: center; margin-bottom: 15px; line-height: 1.4; text-shadow: 1px 1px 2px rgba(214, 51, 132, 0.1);
+        }
+        .poem-divider { color: #ffb3c6; font-size: 1.5rem; text-align: center; margin-bottom: 15px; }
+        
+        .frase-amor {
+            font-size: 1.2rem;
+            color: #7a5c61;
+            font-weight: 600;
+            font-style: italic;
+            background: #fff0f5;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #d63384;
+            margin-top: 10px;
+        }
+
+        .key-input {
+            padding: 10px 15px; font-size: 1.1rem; border: 2px solid #ccc;
+            border-radius: 20px; font-family: 'Lora', serif; text-align: center; outline: none;
+            width: 80%; max-width: 250px; text-transform: uppercase; margin-bottom: 15px; display: none; 
+        }
+        .key-input:focus { border-color: #d63384; }
+
+        .key-btn, .btn-action {
+            padding: 12px 28px; background: #d63384; color: white; border: none;
+            border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            transition: 0.3s; font-family: 'Lora', serif; display: none;
+        }
+        .key-btn:hover, .btn-action:hover { background: #ff4d6d; transform: scale(1.05); }
+        
+        .level-box.active-lock .key-btn { display: block; }
+        .level-box.active-lock .key-input { border-color: #ffb3c6; display: block; }
+        .level-box.active-lock .padlock-title { color: #d63384; }
+        .level-box.active-lock .reto-text { display: block; }
+        
+        .level-box.locked:not(.active-lock) .reto-text { display: none; }
+        .level-box.locked:not(.active-lock) .padlock-title::after { content: " (Bloqueado)"; font-size: 1rem; color: #aaa; }
+
+        /* Contenedor 100 Razones */
+        #razones-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #fffafa;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            text-align: left;
+            animation: fadeIn 0.8s ease-in;
+        }
+        .razones-scroll {
+            max-height: 280px;
+            overflow-y: scroll;
+            padding-right: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        .razones-scroll ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .razones-scroll li {
+            margin-bottom: 8px;
+        }
+
+        /* Reproductor de Música */
+        #cancion-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff0f5;
+            border-radius: 15px;
+            border: 2px dashed #d63384;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        /* Sección de Decisión y Propuesta */
+        .decision-box { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 2px dashed #ffb3c6; 
+            margin-top: 30px; 
+            text-align: center; 
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+        .decision-box p { font-weight: bold; color: #d63384; font-size: 1.25rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .btn-yes, .btn-no { padding: 12px 25px; margin: 10px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
+        .btn-yes { background: #d63384; color: white; }
+        .btn-yes:hover { background: #ff4d6d; transform: scale(1.05); box-shadow: 0 5px 15px rgba(214,51,132,0.3); }
+        .btn-no { background: #e0e0e0; color: #555; }
+        .btn-no:hover { background: #ccc; color: #333; }
+
+        #final-key-reveal { display: none; margin-top: 20px; padding: 15px; background: #fff0f5; color: #d63384; font-weight: bold; border-radius: 10px; border: 1px solid #ffb3c6; animation: fadeIn 0.5s ease-in; text-align: justify; }
+
+        .shein-gift { background: #ffe6f2; padding: 25px; border-radius: 15px; border: 2px dashed #d63384; text-align: center; font-weight: bold; color: #d63384; font-size: 1.15rem; box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1); }
+
+        /* Avatares fijos */
+        .avatar-izq, .avatar-der {
+            position: fixed;
+            bottom: -10px; 
+            width: 280px; 
+            z-index: 1000;
+            pointer-events: none; 
+            transition: all 0.3s ease;
+        }
+
+        .avatar-izq { left: 20px; }
+        .avatar-der { right: 20px; }
+
+        @media (max-width: 1100px) {
+            .avatar-izq, .avatar-der { width: 180px; opacity: 0.7; }
+        }
+
+        @media (max-width: 768px) {
+            .avatar-izq, .avatar-der { display: none; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        @media (max-width: 600px) {
+            .container { padding: 25px 15px; }
+            .title-love { font-size: 3.2rem; }
+            .poem { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AVATARES -->
+    <img src="imagen_2026-08-21_150745802.-fotor-enhance-2026082115935.png" class="avatar-izq" alt="m4riw">
+    <img src="imagen_2026-08-21_151214865.-fotor-enhance-20260821151304.png" class="avatar-der" alt="Pedro">
+
+    <!-- PANTALLA DE BLOQUEO GLOBAL -->
+    <div id="pantalla-bloqueo" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 9999; background: linear-gradient(135deg, #fff0f5 0%, #ffcce0 100%);">
+        <div id="seccion-clave" style="text-align: center; background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px; box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1); border: 1px solid #ffb3c6; width: 90%; max-width: 450px;">
+            <p style="font-size: 1.5rem; font-weight: bold; color: #d63384; margin-bottom: 20px; font-family: 'Lora', serif;">HOLA MARIAN 👋</p>
+            <p style="font-size: 1.1rem; color: #7a5c61; margin-bottom: 25px;">Si estás dispuesta a jugar y descubrir lo que siento... pedime la primera clave. 😏</p>
+            <input type="text" id="clave-ingreso" placeholder="INGRESÁ LA CLAVE ACÁ" style="padding: 12px; border-radius: 20px; border: 2px solid #ffb3c6; text-align: center; text-transform: uppercase; outline: none; margin-bottom: 15px; font-family: 'Lora', serif; font-size: 1.1rem; width: 80%;">
+            <br>
+            <button onclick="verificarClaveGlobal()" style="padding: 12px 35px; background: #d63384; color: white; border: none; border-radius: 25px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif;">Entrar</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container" id="contenido-principal" style="display: none;">
+        <div class="title-love">MARIAN</div>
+        <div class="subtitle">
+            Para avanzar y abrir los candados, vas a tener que cumplir el <strong>"reto"</strong> de cada día. Si lo hacés, te doy la clave. Leé con atención... ✨
+        </div>
+
+        <div id="levels-container">
+            
+            <!-- DIA 1 -->
+            <div class="level-box locked" id="level-0">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 1</div>
+                    <div class="reto-text">📌 Reto: Pasarme el TikTok que más te guste o te haya hecho reír hoy.</div>
+                    <input type="text" id="input-0" class="key-input" placeholder="CLAVE DÍA 1">
+                    <button class="key-btn" id="btn-0" onclick="tryUnlock(0)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Guardar lo que siento es apagar el sol,<br>
+                        y yo quiero que brille en cada rincón.<br>
+                        Hoy suelto mis miedos, te abro el corazón,<br>
+                        porque callar esto, me quita la razón.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Me gustás muchísimo, Marian. No hay nada más liberador que decirte lo importante que sos para mí."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 2 -->
+            <div class="level-box locked" id="level-1">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 2</div>
+                    <div class="reto-text">📌 Reto: Decirme cuál es la canción que tenés pegada en la cabeza últimamente.</div>
+                    <input type="text" id="input-1" class="key-input" placeholder="CLAVE DÍA 2">
+                    <button class="key-btn" id="btn-1" onclick="tryUnlock(1)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Sé que tus silencios tienen su propio idioma,<br>
+                        y que tu espacio es sagrado, como tu aroma.<br>
+                        No quiero cambiarte, ni alterar tu paz,<br>
+                        solo quiero quererte, cada día un poco más.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Me enamora todo de vos, hasta tu forma de ser independiente. Sos perfecta tal cual sos."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 3 -->
+            <div class="level-box locked" id="level-2">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 3</div>
+                    <div class="reto-text">📌 Reto: Contarme un chisme jugoso o algo random/gracioso que te pasó hoy.</div>
+                    <input type="text" id="input-2" class="key-input" placeholder="CLAVE DÍA 3">
+                    <button class="key-btn" id="btn-2" onclick="tryUnlock(2)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Me dices que mire hacia otro lugar,<br>
+                        que hay otros destinos donde anclar.<br>
+                        Pero no entiendes que en este mar,<br>
+                        tu risa es la única que quiero escuchar.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Podría haber un millón de personas en el mundo, pero mis ojos y mi corazón siempre te van a elegir a vos."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 4 -->
+            <div class="level-box locked" id="level-3">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 4</div>
+                    <div class="reto-text">📌 Reto: Mandarme un audio contándome qué fue lo mejor de tu día.</div>
+                    <input type="text" id="input-3" class="key-input" placeholder="CLAVE DÍA 4">
+                    <button class="key-btn" id="btn-3" onclick="tryUnlock(3)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Te volviste mi sol en cada madrugada,<br>
+                        la charla infinita, mi luz preferida.<br>
+                        Sin vernos de frente, mi alma está atada,<br>
+                        a esta conexión, que le da magia a mi vida.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Sos mi primer pensamiento al despertar y la dueña de todas las sonrisas que se me escapan durante el día."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 5 -->
+            <div class="level-box locked" id="level-4">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 5</div>
+                    <div class="reto-text">📌 Reto: Jugar una partida conmigo (al juego que quieras) y ganarla.</div>
+                    <input type="text" id="input-4" class="key-input" placeholder="CLAVE DÍA 5">
+                    <button class="key-btn" id="btn-4" onclick="tryUnlock(4)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        No pido cadenas, ni un título urgente,<br>
+                        solo abrir la puerta y tenerte de frente.<br>
+                        Dejar que el destino nos marque el compás,<br>
+                        y ver si te animas a un poquito más.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "No quiero presionar al tiempo, solo quiero que el tiempo que pase sea descubriendo el mundo a tu lado."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 6 -->
+            <div class="level-box locked" id="level-5">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 6</div>
+                    <div class="reto-text">📌 Reto: Mandarme una foto de tu outfit de hoy o de lo que estés haciendo.</div>
+                    <input type="text" id="input-5" class="key-input" placeholder="CLAVE DÍA 6">
+                    <button class="key-btn" id="btn-5" onclick="tryUnlock(5)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Que fluyan las ganas y el tiempo se pare,<br>
+                        sin reglas ni miedos que nos separen.<br>
+                        Dejar que este puente de a poco se arme,<br>
+                        y en esa aventura, por fin entregarte.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Mi plan favorito no es un lugar, es cualquier momento donde estemos juntos riéndonos de todo."
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIA 7 -->
+            <div class="level-box locked" id="level-6">
+                <div class="locked-view">
+                    <div class="padlock-title">🔒 Día 7</div>
+                    <div class="reto-text">📌 Reto: Responder con total sinceridad a una pregunta que te voy a hacer por chat.</div>
+                    <input type="text" id="input-6" class="key-input" placeholder="CLAVE DÍA 7">
+                    <button class="key-btn" id="btn-6" onclick="tryUnlock(6)">Desbloquear</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Si cruzar la línea nos causa temor,<br>
+                        te juro que el premio es un gran amor.<br>
+                        Mi amistad es tuya, no va a caducar,<br>
+                        pero soñar juntos... me invita a volar.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="frase-amor">
+                        "Sos la casualidad más linda que me cruzó la vida. Te adoro con todo mi ser, Marian, y me muero de ganas de hacerte feliz."
+                    </div>
+                    
+                    <!-- Botón para ver las 100 razones -->
+                    <div style="margin-top: 30px;">
+                        <button class="btn-action" id="btn-mostrar-razones" style="display: inline-block;" onclick="mostrarRazones()">💖 100 razones por las que me gustás 💖</button>
+                    </div>
+
+                    <!-- Caja con scroll de 100 razones -->
+                    <div id="razones-box">
+                        <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; text-align: center; margin-top: 0;">Deslizá hasta el final para leerlas todas ✨</p>
+                        <div class="razones-scroll" id="scroll-razones" onscroll="verificarScrollRazones()">
+                            <ol id="lista-razones"></ol>
+                        </div>
+                    </div>
+
+                    <!-- Botón y reproductor de la canción -->
+                    <div style="margin-top: 25px;">
+                        <button class="btn-action" id="btn-mostrar-cancion" onclick="mostrarCancion()">🎵 La canción con la que te conocí 🎵</button>
+                    </div>
+
+                    <div id="cancion-box">
+                        <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; margin-top: 0;">Dale play para escucharla... 🎧</p>
+                        <audio id="audio-cancion" controls style="width: 100%; outline: none;" onended="habilitarPropuesta()">
+                            <source src="Kali Uchis - Muévelo (Letra) actualiza ma actualiza [MYvx_BiRmnY] (1).mp3" type="audio/mpeg">
+                            Tu navegador no soporta reproducción de audio.
+                        </audio>
+                        <p style="font-size: 0.9rem; color: #7a5c61; margin-top: 10px;">(Escuchala o dejala correr hasta el final para continuar)</p>
+                    </div>
+
+                    <!-- Caja de Decisión -->
+                    <div class="decision-box" id="decision-box">
+                        <p>Llegaste al final de todo esto... Si querés una sorpresa, podés pedirme la clave, pero quiero que sepas que <strong>no estás para nada obligada a aceptar nada</strong>.<br><br>
+                        Mi propuesta sincera es intentar darnos una oportunidad, ser "algo sin ser nada" y dejar que las cosas fluyan a su tiempo. Y si no funciona o te arrepentís, te prometo que nuestra amistad de siempre sigue intacta. ❤️</p>
+                        
+                        <button class="btn-yes" onclick="acceptProposal()">Sí, quiero pedirte la clave</button>
+                        <button class="btn-no" onclick="declineProposal()">Prefiero que sigamos como siempre</button>
+                        <div id="final-key-reveal"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SORPRESA FINAL -->
+            <div class="level-box locked" id="level-7" style="display: none;">
+                <div class="locked-view">
+                    <div class="padlock-title">🎁 Cupón Especial</div>
+                    <div class="reto-text" style="display:block;">📌 Reto: Pedime la clave final por chat.</div>
+                    <input type="text" id="input-7" class="key-input" placeholder="CLAVE FINAL" style="display:block; margin: 0 auto 15px auto;">
+                    <button class="key-btn" id="btn-7" onclick="tryUnlock(7)" style="display:block; margin: 0 auto;">Desbloquear Regalo</button>
+                </div>
+                <div class="unlocked-view">
+                    <div class="poem">
+                        Un paso valiente, un mundo a explorar,<br>
+                        gracias por animarte a esto que sentimos.<br>
+                        Con un regalito te quiero mimar,<br>
+                        por esta aventura que recién abrimos.
+                    </div>
+                    <div class="poem-divider">❧ ♥ ☙</div>
+                    <div class="shein-gift">
+                        ¡Gracias por animarte y confiar en mí, Marian! 🥰 <br><br>
+                        Te ganaste un <strong>Cupón de 40 Dólares para comprar lo que quieras en SHEIN</strong>. 🛍️✨<br><br>
+                        Escribime al chat y coordinamos para pasártelo y que elijas todo lo que te guste. ¡Te adoro! 💙
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button onclick="reiniciarPrueba()" style="margin-top: 30px; padding: 5px 10px; font-size: 0.8rem; background: #ccc; border: none; cursor: pointer; border-radius: 5px; color: #555;">Resetear mi progreso</button>
+
+    </div>
+
+    <script>
+        // Variables Globales
+        let isGlobalUnlocked = localStorage.getItem('marianGlobalUnlock') === 'true';
+        let unlockedLevel = parseInt(localStorage.getItem('marianLevel')) || 0;
+
+        const validKeys = ["SONRISA", "MARIAN", "SECRETO", "TUVOZ", "VICTORIA", "HERMOSA", "VALIENTE", "TE AMO"];
+        const CLAVE_INGRESO = "PAPAFRITA"; 
+
+        // Generar 100 razones románticas
+        const razonesTexto = [
+            "Por tu risa que me alegra el día al instante.",
+            "Porque hacés que el tiempo pase volando cuando hablamos.",
+            "Por tu forma tan única de ser vos misma.",
+            "Porque jugar con vos es mi momento favorito de la semana.",
+            "Por tus silencios que también me dicen mucho.",
+            "Porque sos súper tierna aunque intentes disimularlo.",
+            "Por cómo te expresás cuando algo te emociona de verdad.",
+            "Porque me encanta escucharte hablar de cualquier cosa.",
+            "Por esa chispa especial que tenés y nadie más tiene.",
+            "Porque sos sincera y vas siempre con la verdad.",
+            "Por la paz inmensa que me transmitís.",
+            "Porque no necesitás fingir nada conmigo.",
+            "Por cómo defendés tus ideas con tanta personalidad.",
+            "Porque sos la primera persona en la que pienso cuando me despierto.",
+            "Por tu buen gusto en canciones.",
+            "Porque cada detalle tuyo me parece hermoso.",
+            "Por tus chistes y ocurrencias de la nada.",
+            "Porque me hacés querer ser una mejor versión de mí mismo.",
+            "Por tus audios que escucho más de una vez.",
+            "Porque me bancás incluso con mis momentos intensos.",
+            "Por tu mirada y esa energía tan linda que irradiás.",
+            "Porque me enseñás a mirar las cosas de otra forma.",
+            "Por tu forma de caminar y moverte en los juegos.",
+            "Por cómo me cuidás a tu manera.",
+            "Porque sos auténtica de pies a cabeza.",
+            "Por la complicidad que tenemos en todo.",
+            "Porque iluminás cualquier día nublado.",
+            "Por tus gustos tan particulares que te hacen única.",
+            "Porque me gusta cómo te vestís.",
+            "Por hacerme reír en los peores momentos.",
+            "Porque con vos no me da vergüenza decir lo que pienso.",
+            "Por tu independencia y fortaleza.",
+            "Porque me encanta tu sentido del humor.",
+            "Por las madrugadas charlando sin parar.",
+            "Porque me hacés sentir en casa cuando hablamos.",
+            "Por tu dulce forma de quejarte de las cosas.",
+            "Porque me motivás a dar lo mejor de mí.",
+            "Por esa risa contagiosa que no podés frenar.",
+            "Porque hacés especial cualquier charla simple.",
+            "Por tu carisma natural.",
+            "Porque sos mi persona favorita en todo el mundo.",
+            "Por cómo se siente hablar con vos después de un día largo.",
+            "Porque no hay nadie que se compare a vos.",
+            "Por tu paciencia conmigo.",
+            "Porque tenés un corazón enorme.",
+            "Por las mil anécdotas que compartimos.",
+            "Porque me hacés sonreír a la pantalla como un tonto.",
+            "Por ser mi mejor compañía a la distancia.",
+            "Porque me encanta saber qué estás haciendo.",
+            "Por tu ternura escondida detrás de tu carácter.",
+            "Porque tus mensajes me cambian el humor al instante.",
+            "Por cómo brillás con luz propia.",
+            "Porque te preocupás por las personas que querés.",
+            "Por tus fotos y cómo salís de linda en todo.",
+            "Porque no puedo evitar hablar de vos con una sonrisa.",
+            "Por la conexión instantánea que tuvimos.",
+            "Porque me hacés olvidar de todos los problemas.",
+            "Por tu voz, que calma cualquier ansiedad.",
+            "Porque sos inteligente y me encanta cómo pensás.",
+            "Por tu forma de ver la vida sin tantas complicaciones.",
+            "Porque con vos aprendí a valorar cada momento.",
+            "Por ser mi refugio en los días complicados.",
+            "Porque tenés una sensibilidad muy linda.",
+            "Por cómo te esforzás en las cosas que te proponés.",
+            "Porque me encanta que me cuentes tu día a día.",
+            "Por tu espontaneidad pura.",
+            "Porque sos el motivo de mis mejores pensamientos.",
+            "Por cómo te reís cuando ganamos una partida.",
+            "Porque aceptás mis defectos sin juzgarme.",
+            "Por la confianza que logramos construir juntos.",
+            "Porque sos linda por dentro y por fuera.",
+            "Por esa forma tan tuya de hacerme sentir especial.",
+            "Porque nunca me canso de hablar con vos.",
+            "Por los stickers y memes que mandás.",
+            "Porque me gusta compartir mis gustos con vos.",
+            "Por el brillo que le das a mis días.",
+            "Porque sos mi casualidad más bonita.",
+            "Por cómo me hacés sentir cuando me decís algo lindo.",
+            "Porque con vos las horas parecen segundos.",
+            "Por no rendirte ante las cosas difíciles.",
+            "Porque me inspirás ternura y ganas de cuidarte.",
+            "Por tu madurez para hablar de ciertas cosas.",
+            "Por ese lado caprichoso y gracioso que tenés a veces.",
+            "Porque me hacés sentir comprendido.",
+            "Por ser ese mensaje que siempre estoy esperando.",
+            "Porque tu presencia lo mejora absolutamente todo.",
+            "Por cómo defendés a tus amigos.",
+            "Porque sos súper leal.",
+            "Por tus reacciones cuando te digo algo cursi.",
+            "Porque me hacés sentir vivo y emocionado cada día.",
+            "Por la magia de tus silencios cómodos.",
+            "Porque hacés que jugar a cualquier juego sea divertido.",
+            "Por ser el motor de muchas de mis alegrías.",
+            "Por todo lo que todavía tenemos por vivir juntos.",
+            "Porque tu felicidad se convirtió en mi felicidad.",
+            "Por tus expresiones únicas cuando hablamos.",
+            "Porque no cambiaría ni un solo segundo de los que pasé con vos.",
+            "Por la simple y maravillosa razón de que sos vos.",
+            "Porque mi corazón te elige una y mil veces.",
+            "Porque te quiero con todo mi ser, Marian."
+        ];
+
+        function cargarRazones() {
+            const lista = document.getElementById("lista-razones");
+            lista.innerHTML = "";
+            razonesTexto.forEach((razon) => {
+                const li = document.createElement("li");
+                li.innerText = razon;
+                lista.appendChild(li);
+            });
+        }
+
+        function iniciarApp() {
+            if (isGlobalUnlocked) {
+                document.getElementById("pantalla-bloqueo").style.display = "none";
+                document.getElementById("contenido-principal").style.display = "block";
+                cargarRazones();
+                renderLevels();
+            } else {
+                document.getElementById("pantalla-bloqueo").style.display = "flex";
+                document.getElementById("contenido-principal").style.display = "none";
+            }
+        }
+
+        function verificarClaveGlobal() {
+            const clave = document.getElementById("clave-ingreso").value.trim().toUpperCase();
+            if (clave === CLAVE_INGRESO || clave === "APOLO") {
+                isGlobalUnlocked = true;
+                localStorage.setItem('marianGlobalUnlock', 'true');
+                if(clave === "APOLO") {
+                    unlockedLevel = 7;
+                    localStorage.setItem('marianLevel', '7');
+                }
+                document.getElementById("pantalla-bloqueo").style.display = "none";
+                document.getElementById("contenido-principal").style.display = "block";
+                cargarRazones();
+                renderLevels();
+            } else {
+                alert("Mmm... esa no es la clave. ¡Pedímela a mí! 😉");
+            }
+        }
+
+        function renderLevels() {
+            for (let i = 0; i <= 7; i++) {
+                const box = document.getElementById('level-' + i);
+                if(!box) continue;
+
+                box.classList.remove('locked', 'unlocked', 'active-lock');
+
+                if (i < unlockedLevel) {
+                    box.classList.add('unlocked');
+                    if(i === 7) box.style.display = 'block';
+                } else {
+                    box.classList.add('locked');
+                    if (i === unlockedLevel) {
+                        box.classList.add('active-lock');
+                    }
+                }
+            }
+
+            if (unlockedLevel > 7) {
+                const decisionBox = document.getElementById('decision-box');
+                if (decisionBox) decisionBox.style.display = 'none';
+            }
+        }
+
+        function tryUnlock(targetLevel) {
+            if (targetLevel > unlockedLevel) {
+                alert("¡Epa! Tenés que desbloquear el día anterior primero. 🔒");
+                return;
+            }
+
+            const inputElement = document.getElementById('input-' + targetLevel);
+            const inputVal = inputElement.value.trim().toUpperCase();
+            
+            if(!inputVal) {
+                alert("Escribí la clave en el casillero.");
+                return;
+            }
+
+            if (inputVal === "APOLO") {
+                unlockedLevel = 7;
+                localStorage.setItem('marianLevel', unlockedLevel);
+                alert("🚀 Todo desbloqueado.");
+                renderLevels();
+                return;
+            }
+
+            if(inputVal === validKeys[targetLevel]) {
+                unlockedLevel++;
+                localStorage.setItem('marianLevel', unlockedLevel);
+                inputElement.value = '';
+                
+                if(targetLevel === 7) {
+                    document.getElementById('level-7').style.display = 'block';
+                }
+                
+                renderLevels();
+                
+                setTimeout(() => {
+                    const nextLevelBox = document.getElementById('level-' + targetLevel);
+                    if(nextLevelBox) {
+                        nextLevelBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+
+            } else {
+                alert("Esa clave no es correcta. ¡Fijate de haberla escrito bien! 🕵️‍♀️");
+            }
+        }
+
+        function mostrarRazones() {
+            const box = document.getElementById("razones-box");
+            box.style.display = "block";
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function verificarScrollRazones() {
+            const scrollDiv = document.getElementById("scroll-razones");
+            // Si llega cerca del fondo
+            if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight - 20) {
+                const btnCancion = document.getElementById("btn-mostrar-cancion");
+                btnCancion.style.display = "inline-block";
+            }
+        }
+
+        function mostrarCancion() {
+            const cancionBox = document.getElementById("cancion-box");
+            cancionBox.style.display = "block";
+            cancionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Habilitar decisión directamente para facilitar lectura
+            setTimeout(() => {
+                document.getElementById('decision-box').style.display = 'block';
+            }, 1000);
+        }
+
+        function habilitarPropuesta() {
+            document.getElementById('decision-box').style.display = 'block';
+            document.getElementById('decision-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function acceptProposal() {
+            const revealBox = document.getElementById('final-key-reveal');
+            revealBox.style.display = 'block';
+            revealBox.style.color = "#d63384";
+            revealBox.style.background = "#fff0f5";
+            revealBox.innerHTML = "¡Qué hermosa! 😍 Para poder ver tu regalo, <strong>mandame un mensaje diciéndome que aceptaste</strong> y te paso la última clave para abrir la caja de abajo.";
+            document.getElementById('level-7').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('level-7').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function declineProposal() {
+            const revealBox = document.getElementById('final-key-reveal');
+            revealBox.style.display = 'block';
+            revealBox.style.color = "#4a4a4a";
+            revealBox.style.background = "#f0f0f0";
+            revealBox.innerHTML = "Entiendo y respeto totalmente tu respuesta. De verdad, no pasa nada y me alegra mucho habértelo dicho con sinceridad. Gracias por tomarte el tiempo de leer todo esto. ¡Te quiero un montón y nuestra amistad sigue intacta siempre! ❤️";
+            document.getElementById('level-7').style.display = 'none';
+        }
+
+        function reiniciarPrueba() {
+            localStorage.removeItem('marianLevel');
+            localStorage.removeItem('marianGlobalUnlock');
+            unlockedLevel = 0;
+            isGlobalUnlocked = false;
+            
+            document.getElementById("clave-ingreso").value = ''; 
+            const inputs = document.querySelectorAll('.key-input');
+            inputs.forEach(input => input.value = '');
+            
+            const revealBox = document.getElementById('final-key-reveal');
+            if(revealBox) revealBox.style.display = 'none';
+            
+            const decisionBox = document.getElementById('decision-box');
+            if(decisionBox) decisionBox.style.display = 'none';
+            document.getElementById('level-7').style.display = 'none';
+            document.getElementById('razones-box').style.display = 'none';
+            document.getElementById('cancion-box').style.display = 'none';
+            document.getElementById('btn-mostrar-cancion').style.display = 'none';
+            
+            alert("¡Progreso reseteado!");
+            iniciarApp();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Arrancar
+        iniciarApp();
+    </script>
+</body>
+</html>
