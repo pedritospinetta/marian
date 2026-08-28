@@ -1,1 +1,527 @@
-PAGINA CERRADA
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Marian</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Lora', serif; 
+            background: linear-gradient(135deg, #fff0f5 0%, #ffcce0 100%);
+            color: #4a4a4a; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
+
+        .container {
+            max-width: 700px; 
+            width: 90%; 
+            margin: 40px auto; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(214, 51, 132, 0.15); 
+            border: 1px solid #ffb3c6;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title-love { 
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem; 
+            color: #d63384; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 5px rgba(214, 51, 132, 0.2); 
+            animation: pulse 2s infinite;
+        }
+
+        .subtitle {
+            font-size: 1.1rem; 
+            color: #7a5c61;
+            font-style: italic;
+            margin-bottom: 30px;
+            background: #fff0f5;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed #ffb3c6;
+        }
+
+        /* Secciones */
+        .section-box {
+            background: #fff;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.1);
+        }
+
+        .section-title { 
+            font-size: 1.5rem; 
+            color: #d63384; 
+            font-weight: bold; 
+            margin-bottom: 15px; 
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+        }
+
+        .message-card {
+            background: #fffafa;
+            border-left: 4px solid #d63384;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #4a4a4a;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* Formulario para que ella conteste */
+        .reply-box {
+            margin-top: 15px;
+            background: #fff5f8;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #ffb3c6;
+        }
+        .reply-box textarea {
+            width: 100%;
+            height: 70px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: 'Lora', serif;
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .reply-box textarea:focus { border-color: #d63384; }
+        .btn-send-reply {
+            background: #d63384;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            float: right;
+            font-family: 'Lora', serif;
+        }
+        .btn-send-reply:hover { background: #ff4d6d; }
+        .clearfix::after { content: ""; clear: both; display: table; }
+
+        /* Contenedor 100 Razones */
+        #razones-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #fffafa;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            text-align: left;
+            animation: fadeIn 0.8s ease-in;
+        }
+        .razones-scroll {
+            max-height: 280px;
+            overflow-y: scroll;
+            padding-right: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        .razones-scroll ol { padding-left: 20px; margin: 0; }
+        .razones-scroll li { margin-bottom: 8px; }
+
+        /* Reproductor de Música */
+        #cancion-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff0f5;
+            border-radius: 15px;
+            border: 2px dashed #d63384;
+            animation: fadeIn 0.8s ease-in;
+            text-align: center;
+        }
+
+        /* Sección de Decisión y Propuesta */
+        .decision-box { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 2px dashed #ffb3c6; 
+            margin-top: 30px; 
+            text-align: center; 
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+        .decision-box p { font-weight: bold; color: #d63384; font-size: 1.25rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .btn-yes, .btn-no, .btn-action { padding: 12px 25px; margin: 10px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
+        .btn-yes { background: #d63384; color: white; }
+        .btn-yes:hover { background: #ff4d6d; transform: scale(1.05); box-shadow: 0 5px 15px rgba(214,51,132,0.3); }
+        .btn-no { background: #e0e0e0; color: #555; }
+        .btn-no:hover { background: #ccc; color: #333; }
+        .btn-action { background: #d63384; color: white; display: inline-block; }
+        .btn-action:hover { background: #ff4d6d; transform: scale(1.05); }
+
+        #final-key-reveal { display: none; margin-top: 20px; padding: 15px; background: #fff0f5; color: #d63384; font-weight: bold; border-radius: 10px; border: 1px solid #ffb3c6; animation: fadeIn 0.5s ease-in; text-align: justify; }
+        .shein-gift { background: #ffe6f2; padding: 25px; border-radius: 15px; border: 2px dashed #d63384; text-align: center; font-weight: bold; color: #d63384; font-size: 1.15rem; box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1); }
+
+        /* Avatares fijos con Nombres */
+        .avatar-container {
+            position: fixed;
+            bottom: -15px; 
+            z-index: 1000;
+            pointer-events: none; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-izq { left: 15px; }
+        .avatar-der { right: 15px; }
+
+        .avatar-container img {
+            width: 350px;
+            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+
+        .avatar-name {
+            background: #fff0f5;
+            color: #d63384;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            font-weight: bold;
+            border: 2px solid #ffb3c6;
+            margin-bottom: -30px;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+        }
+
+        @media (max-width: 1200px) {
+            .avatar-container img { width: 220px; }
+            .avatar-name { font-size: 1.6rem; margin-bottom: -20px; padding: 5px 15px; }
+            .avatar-izq { left: 5px; }
+            .avatar-der { right: 5px; opacity: 0.8; }
+        }
+
+        @media (max-width: 850px) {
+            .avatar-container { display: none; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        @media (max-width: 600px) {
+            .container { padding: 25px 15px; }
+            .title-love { font-size: 3.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="avatar-container avatar-izq">
+        <div class="avatar-name">M4RIW</div>
+        <img src="imagen_2026-08-21_150745802.-fotor-enhance-2026082115935.png" alt="M4riw">
+    </div>
+
+    <div class="avatar-container avatar-der">
+        <div class="avatar-name">ALE</div>
+        <img src="imagen_2026-08-21_151214865.-fotor-enhance-20260821151304.png" alt="Ale">
+    </div>
+
+    <div class="container" id="contenido-principal">
+        <div class="title-love">MARIAN</div>
+        <div class="subtitle">
+            Un espacio creado solo para vos. Leé lo que te dejo y podés responderme directamente abajo en cada sección. ✨
+        </div>
+
+        <div id="sections-container">
+            
+            <div class="section-box">
+                <div class="section-title">Lo que guardaba por dentro</div>
+                <div class="message-card">
+                    Mariancita, antes que nada, gracias por leer esto. Vengo dándole mil vueltas al asunto, haciéndome la cabeza mal durante días, y me di cuenta de que guardarme lo que siento me hace pedazos por dentro. Tratar de hacerme el tonto o hacer de cuenta que no pasa nada me hace muchísimo peor. Prefiero ir de frente con vos, porque sos muy importante para mí.
+                </div>
+                <div class="reply-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                        <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
+                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 1">
+                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Contale algo a Ale sobre esto:</label>
+                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
+                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-title">Tu espacio y tu forma de ser</div>
+                <div class="message-card">
+                    Entiendo y respeto perfectamente tu postura. Sé muy bien que no sos de demostrar afecto con palabras dulces de la nada, que no te va eso de andar pegoteada todo el tiempo, y está perfecto. Te quiero a tu manera, lo cual para mí vale oro. Por eso te pido perdón si en algún momento te sentiste presionada o fui demasiado intenso; jamás fue mi intención.
+                </div>
+                <div class="reply-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                        <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
+                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 2">
+                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
+                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
+                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-title">Por qué sos vos</div>
+                <div class="message-card">
+                    Me pediste que intente apagar lo que siento y que seguramente voy a encontrar a otra. Pero la verdad es que yo no quiero a otra, ni estoy buscando a nadie más. No me interesa si hay un millón de personas ahí afuera, porque con la que me cago de risa, con la que me paso horas jugando y con la que conecto de esta forma única, es con vos. Encajás perfecto en lo que quiero.
+                </div>
+                <div class="reply-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                        <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
+                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 3">
+                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
+                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
+                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-title">Lo indispensable que sos</div>
+                <div class="message-card">
+                    Es imposible apagar este sentimiento cuando te volviste una persona absolutamente indispensable en mi día a día. Me despierto y ya tengo ganas de ver si me mandaste algo. Disfruto como loco cada charla sin sentido, ayudarte en todo lo que necesites y saber que estás ahí del otro lado. Siento que te conozco un montón.
+                </div>
+                <div class="reply-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                        <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
+                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 4">
+                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
+                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
+                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-box" style="text-align: center;">
+                <div class="section-title">Detalles especiales</div>
+                <p style="color: #7a5c61; margin-bottom: 20px;">Preparé algo especial para vos. Hacé clic para leerlo:</p>
+                <button class="btn-action" onclick="mostrarRazones()">💖 100 razones por las que me gustás 💖</button>
+
+                <div id="razones-box">
+                    <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; text-align: center; margin-top: 0;">Deslizá hasta el final para leerlas todas ✨</p>
+                    <div class="razones-scroll" id="scroll-razones" onscroll="verificarScrollRazones()">
+                        <ol id="lista-razones"></ol>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px;">
+                    <button class="btn-action" id="btn-mostrar-cancion" style="display: none;" onclick="mostrarCancion()">🎵 La canción con la que te conocí 🎵</button>
+                </div>
+
+                <div id="cancion-box">
+                    <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; margin-top: 0;">Dale play para escucharla... 🎧</p>
+                    <audio id="audio-cancion" controls style="width: 100%; outline: none;" onended="habilitarPropuesta()">
+                        <source src="Kali Uchis - Muévelo (Letra) actualiza ma actualiza [MYvx_BiRmnY] (1).mp3" type="audio/mpeg">
+                        Tu navegador no soporta reproducción de audio.
+                    </audio>
+                </div>
+
+                <div class="decision-box" id="decision-box">
+                    <p>Llegaste al final de todo esto... Quiero que sepas que <strong>no estás para nada obligada a aceptar nada</strong>.<br><br>
+                    Mi propuesta sincera es intentar darnos una oportunidad, ser "algo sin ser nada" y dejar que las cosas fluyan a su tiempo. Y si no funciona o te arrepentís, te prometo que nuestra amistad de siempre sigue intacta. ❤️</p>
+                    
+                    <button class="btn-yes" onclick="acceptProposal()">Sí, me animo</button>
+                    <button class="btn-no" onclick="declineProposal()">Prefiero que sigamos como amigos</button>
+                    <div id="final-key-reveal"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const razonesTexto = [
+            "Por tu risa que me alegra el día al instante.",
+            "Porque hacés que el tiempo pase volando cuando hablamos.",
+            "Por tu forma tan única de ser vos misma.",
+            "Porque jugar con vos es mi momento favorito de la semana.",
+            "Por tus silencios que también me dicen mucho.",
+            "Porque sos súper tierna aunque intentes disimularlo.",
+            "Por cómo te expresás cuando algo te emociona de verdad.",
+            "Porque me encanta escucharte hablar de cualquier cosa.",
+            "Por esa chispa especial que tenés y nadie más tiene.",
+            "Porque sos sincera y vas siempre con la verdad.",
+            "Por la paz inmensa que me transmitís.",
+            "Porque no necesitás fingir nada conmigo.",
+            "Por cómo defendés tus ideas con tanta personalidad.",
+            "Porque sos la primera persona en la que pienso cuando me despierto.",
+            "Por tu buen gusto en canciones.",
+            "Por cada detalle tuyo me parece hermoso.",
+            "Por tus chistes y ocurrencias de la nada.",
+            "Porque me hacés querer ser una mejor versión de mí mismo.",
+            "Por tus audios que escucho más de una vez.",
+            "Porque me bancás incluso con mis momentos intensos.",
+            "Por tu mirada y esa energía tan linda que irradiás.",
+            "Por me enseñás a mirar las cosas de otra forma.",
+            "Por tu forma de caminar y moverte en los juegos.",
+            "Por cómo me cuidás a tu manera.",
+            "Por sos auténtica de pies a cabeza.",
+            "Por la complicidad que tenemos en todo.",
+            "Porque iluminás cualquier día nublado.",
+            "Por tus gustos tan particulares que te hacen única.",
+            "Por me gusta cómo te vestís.",
+            "Por hacerme reír en los peores momentos.",
+            "Porque con vos no me da vergüenza decir lo que pienso.",
+            "Por tu independencia y fortaleza.",
+            "Por me encanta tu sentido del humor.",
+            "Por las madrugadas charlando sin parar.",
+            "Por me hacés sentir en casa cuando hablamos.",
+            "Por tu dulce forma de quejarte de las cosas.",
+            "Por me motivás a dar lo mejor de mí.",
+            "Por esa risa contagiosa que no podés frenar.",
+            "Porque hacés especial cualquier charla simple.",
+            "Por tu carisma natural.",
+            "Por sos mi persona favorita en todo el mundo.",
+            "Por cómo se siente hablar con vos después de un día largo.",
+            "Por qué no hay nadie que se compare a vos.",
+            "Por tu paciencia conmigo.",
+            "Por tenés un corazón enorme.",
+            "Por las mil anécdotas que compartimos.",
+            "Por me hacés sonreír a la pantalla como un tonto.",
+            "Por ser mi mejor compañía a la distancia.",
+            "Por me encanta saber qué estás haciendo.",
+            "Por tu ternura escondida detrás de tu carácter.",
+            "Por tus mensajes me cambian el humor al instante.",
+            "Por cómo brillás con luz propia.",
+            "Por te preocupás por las personas que querés.",
+            "Por tus fotos y cómo salís de linda en todo.",
+            "Por no puedo evitar hablar de vos con una sonrisa.",
+            "Por la conexión instantánea que tuvimos.",
+            "Por me hacés olvidar de todos los problemas.",
+            "Por tu voz, que calma cualquier ansiedad.",
+            "Por sos inteligente y me encanta cómo pensás.",
+            "Por tu forma de ver la vida sin tantas complicaciones.",
+            "Por con vos aprendí a valorar cada momento.",
+            "Por ser mi refugio en los días complicados.",
+            "Por tenés una sensibilidad muy linda.",
+            "Por cómo te esforzás en las cosas que te proponés.",
+            "Por me encanta que me cuentes tu día a día.",
+            "Por tu espontaneidad pura.",
+            "Por sos el motivo de mis mejores pensamientos.",
+            "Por cómo te reís cuando ganamos una partida.",
+            "Por aceptás mis defectos sin juzgarme.",
+            "Por la confianza que logramos construir juntos.",
+            "Por sos linda por dentro y por fuera.",
+            "Por esa forma tan tuya de hacerme sentir especial.",
+            "Por nunca me canso de hablar con vos.",
+            "Por los stickers y memes que mandás.",
+            "Por me gusta compartir mis gustos con vos.",
+            "Por el brillo que le das a mis días.",
+            "Por sos mi casualidad más bonita.",
+            "Por cómo me hacés sentir cuando me decís algo lindo.",
+            "Por con vos las horas parecen segundos.",
+            "Por no rendirte ante las cosas difíciles.",
+            "Por me inspirás ternura y ganas de cuidarte.",
+            "Por tu madurez para hablar de ciertas cosas.",
+            "Por ese lado caprichoso y gracioso que tenés a veces.",
+            "Por me hacés sentir comprendido.",
+            "Por ser ese mensaje que siempre estoy esperando.",
+            "Por tu presencia lo mejora absolutamente todo.",
+            "Por cómo defendés a tus amigos.",
+            "Por sos súper leal.",
+            "Por tus reacciones cuando te digo algo cursi.",
+            "Por me hacés sentir vivo y emocionado cada día.",
+            "Por la magia de tus silencios cómodos.",
+            "Por hacés que jugar a cualquier juego sea divertido.",
+            "Por ser el motor de muchas de mis alegrías.",
+            "Por todo lo que todavía tenemos por vivir juntos.",
+            "Por tu felicidad se convirtió en mi felicidad.",
+            "Por tus expresiones únicas cuando hablamos.",
+            "Por no cambiaría ni un solo segundo de los que pasé con vos.",
+            "Por la simple y maravillosa razón de que sos vos.",
+            "Por mi corazón te elige una y mil veces.",
+            "Por te quiero con todo mi ser, Marian."
+        ];
+
+        function cargarRazones() {
+            const lista = document.getElementById("lista-razones");
+            lista.innerHTML = "";
+            razonesTexto.forEach((razon) => {
+                const li = document.createElement("li");
+                li.innerText = razon;
+                lista.appendChild(li);
+            });
+        }
+
+        function mostrarRazones() {
+            const box = document.getElementById("razones-box");
+            box.style.display = "block";
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function verificarScrollRazones() {
+            const scrollDiv = document.getElementById("scroll-razones");
+            if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight - 20) {
+                const btnCancion = document.getElementById("btn-mostrar-cancion");
+                btnCancion.style.display = "inline-block";
+            }
+        }
+
+        function mostrarCancion() {
+            const cancionBox = document.getElementById("cancion-box");
+            cancionBox.style.display = "block";
+            cancionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            setTimeout(() => {
+                document.getElementById('decision-box').style.display = 'block';
+            }, 1000);
+        }
+
+        function habilitarPropuesta() {
+            document.getElementById('decision-box').style.display = 'block';
+            document.getElementById('decision-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function acceptProposal() {
+            const revealBox = document.getElementById('final-key-reveal');
+            revealBox.style.display = 'block';
+            revealBox.style.color = "#d63384";
+            revealBox.style.background = "#fff0f5";
+            revealBox.innerHTML = `¡Qué hermosa! 😍 Como aceptaste, te ganaste tu sorpresa: un <strong>Cupón de 40 Dólares para comprar en SHEIN</strong>. 🛍️✨<br><br>Escribime al chat y te lo paso para que elijas lo que quieras. ¡Te adoro! 💙`;
+        }
+
+        function declineProposal() {
+            const revealBox = document.getElementById('final-key-reveal');
+            revealBox.style.display = 'block';
+            revealBox.style.color = "#4a4a4a";
+            revealBox.style.background = "#f0f0f0";
+            revealBox.innerHTML = "Entiendo y respeto totalmente tu respuesta. De verdad, no pasa nada y me alegra mucho habértelo dicho con sinceridad. Gracias por tomarte el tiempo de leer todo esto. ¡Te quiero un montón y nuestra amistad sigue intacta siempre! ❤️";
+        }
+
+        cargarRazones();
+    </script>
+</body>
+</html>
