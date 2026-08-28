@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 700px; 
+            max-width: 750px; 
             width: 90%; 
             margin: 40px auto; 
             background: rgba(255, 255, 255, 0.95); 
@@ -55,8 +55,8 @@
             border: 1px dashed #ffb3c6;
         }
 
-        /* Secciones */
-        .section-box {
+        /* Bloques de lectura y completar */
+        .step-box {
             background: #fff;
             border: 2px solid #ffb3c6;
             border-radius: 15px;
@@ -64,10 +64,16 @@
             padding: 25px;
             text-align: left;
             box-shadow: 0 5px 15px rgba(214, 51, 132, 0.1);
+            display: none;
         }
 
-        .section-title { 
-            font-size: 1.5rem; 
+        .step-box.active {
+            display: block;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .step-title { 
+            font-size: 1.6rem; 
             color: #d63384; 
             font-weight: bold; 
             margin-bottom: 15px; 
@@ -75,28 +81,37 @@
             text-align: center;
         }
 
-        .message-card {
+        .text-content {
             background: #fffafa;
             border-left: 4px solid #d63384;
             padding: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             color: #4a4a4a;
             border-radius: 0 10px 10px 0;
+            text-align: justify;
         }
 
-        /* Formulario para que ella conteste */
-        .reply-box {
-            margin-top: 15px;
+        .question-box {
             background: #fff5f8;
             padding: 15px;
             border-radius: 12px;
             border: 1px solid #ffb3c6;
+            margin-top: 15px;
         }
-        .reply-box textarea {
+
+        .question-box label {
+            font-size: 1rem;
+            color: #d63384;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .question-box textarea {
             width: 100%;
-            height: 70px;
+            height: 60px;
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #ccc;
@@ -105,56 +120,66 @@
             outline: none;
             box-sizing: border-box;
             font-size: 1rem;
+            margin-bottom: 10px;
         }
-        .reply-box textarea:focus { border-color: #d63384; }
-        .btn-send-reply {
+        .question-box textarea:focus { border-color: #d63384; }
+
+        .btn-next {
             background: #d63384;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.95rem;
-            margin-top: 8px;
-            float: right;
+            font-size: 1rem;
             font-family: 'Lora', serif;
+            float: right;
+            transition: 0.3s;
         }
-        .btn-send-reply:hover { background: #ff4d6d; }
+        .btn-next:hover { background: #ff4d6d; transform: scale(1.05); }
         .clearfix::after { content: ""; clear: both; display: table; }
 
-        /* Contenedor 100 Razones */
-        #razones-box {
+        /* Contenedor 100 Razones (Lista interactiva tipo acordeón/clic) */
+        #razones-section {
             display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #fffafa;
-            border: 2px solid #ffb3c6;
-            border-radius: 15px;
+            animation: fadeIn 0.8s ease-in;
             text-align: left;
-            animation: fadeIn 0.8s ease-in;
         }
-        .razones-scroll {
-            max-height: 280px;
-            overflow-y: scroll;
-            padding-right: 15px;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #555;
-        }
-        .razones-scroll ol { padding-left: 20px; margin: 0; }
-        .razones-scroll li { margin-bottom: 8px; }
 
-        /* Reproductor de Música */
-        #cancion-box {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #fff0f5;
-            border-radius: 15px;
-            border: 2px dashed #d63384;
-            animation: fadeIn 0.8s ease-in;
-            text-align: center;
+        .razones-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: scroll;
+            padding-right: 10px;
+            margin-top: 20px;
+        }
+
+        .razon-card {
+            background: #fffafa;
+            border: 1px solid #ffb3c6;
+            padding: 12px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.05rem;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .razon-card:hover {
+            background: #ffe6ea;
+            border-color: #d63384;
+        }
+
+        .razon-card span {
+            font-size: 0.85rem;
+            color: #d63384;
+            font-weight: bold;
         }
 
         /* Sección de Decisión y Propuesta */
@@ -170,13 +195,11 @@
         }
         .decision-box p { font-weight: bold; color: #d63384; font-size: 1.25rem; margin-bottom: 20px; line-height: 1.6; }
 
-        .btn-yes, .btn-no, .btn-action { padding: 12px 25px; margin: 10px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
+        .btn-yes, .btn-no { padding: 12px 25px; margin: 10px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
         .btn-yes { background: #d63384; color: white; }
         .btn-yes:hover { background: #ff4d6d; transform: scale(1.05); box-shadow: 0 5px 15px rgba(214,51,132,0.3); }
         .btn-no { background: #e0e0e0; color: #555; }
         .btn-no:hover { background: #ccc; color: #333; }
-        .btn-action { background: #d63384; color: white; display: inline-block; }
-        .btn-action:hover { background: #ff4d6d; transform: scale(1.05); }
 
         #final-key-reveal { display: none; margin-top: 20px; padding: 15px; background: #fff0f5; color: #d63384; font-weight: bold; border-radius: 10px; border: 1px solid #ffb3c6; animation: fadeIn 0.5s ease-in; text-align: justify; }
         .shein-gift { background: #ffe6f2; padding: 25px; border-radius: 15px; border: 2px dashed #d63384; text-align: center; font-weight: bold; color: #d63384; font-size: 1.15rem; box-shadow: 0 10px 20px rgba(214, 51, 132, 0.1); }
@@ -251,258 +274,244 @@
     <div class="container" id="contenido-principal">
         <div class="title-love">MARIAN</div>
         <div class="subtitle">
-            Un espacio creado solo para vos. Leé lo que te dejo y podés responderme directamente abajo en cada sección. ✨
+            Leé con atención este pequeño texto y completá las preguntas para avanzar. Todo lo que escribas me llegará al instante. ✨
         </div>
 
-        <div id="sections-container">
+        <div id="steps-container">
             
-            <div class="section-box">
-                <div class="section-title">Lo que guardaba por dentro</div>
-                <div class="message-card">
-                    Mariancita, antes que nada, gracias por leer esto. Vengo dándole mil vueltas al asunto, haciéndome la cabeza mal durante días, y me di cuenta de que guardarme lo que siento me hace pedazos por dentro. Tratar de hacerme el tonto o hacer de cuenta que no pasa nada me hace muchísimo peor. Prefiero ir de frente con vos, porque sos muy importante para mí.
+            <div class="step-box active" id="step-1">
+                <div class="step-title">Capítulo I: Lo que anduve pensando</div>
+                <div class="text-content">
+                    Sé que a veces te parezco medio denso o que le doy muchas vueltas a las cosas. La realidad es que estos días estuve pensando un montón en cómo nos llevamos, en las horas que pasamos jugando y en lo mucho que disfruto hablar con vos. Para mí no sos una amiga más, te ganaste un lugar re importante y me parecía medio tonto seguir disimulando lo que me pasa por dentro.
                 </div>
-                <div class="reply-box">
-                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                <div class="question-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="enviarPaso(event, 1)">
                         <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
-                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 1">
-                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Contale algo a Ale sobre esto:</label>
-                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
-                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <input type="hidden" name="subject" value="Marian completó el Capítulo 1">
+                        <label>Para confirmar que leíste: ¿Qué opinás de lo que acabo de decirte?</label>
+                        <textarea name="respuesta_1" placeholder="Escribí tu respuesta acá..." required></textarea>
+                        <button type="submit" class="btn-next">Siguiente capítulo ➔</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>
             </div>
 
-            <div class="section-box">
-                <div class="section-title">Tu espacio y tu forma de ser</div>
-                <div class="message-card">
-                    Entiendo y respeto perfectamente tu postura. Sé muy bien que no sos de demostrar afecto con palabras dulces de la nada, que no te va eso de andar pegoteada todo el tiempo, y está perfecto. Te quiero a tu manera, lo cual para mí vale oro. Por eso te pido perdón si en algún momento te sentiste presionada o fui demasiado intenso; jamás fue mi intención.
+            <div class="step-box" id="step-2">
+                <div class="step-title">Capítulo II: Tu espacio y tu forma de ser</div>
+                <div class="text-content">
+                    También entiendo perfecto cómo sos vos. Sé que no te va eso de andar regalando mimos de la nada ni de estar pegoteada todo el tiempo, y te juro que valoro un montón tu independencia. No pretendo cambiarte en nada; me gustás exactamente con tu carácter, tus silencios y tu forma de ver el mundo. Lo único que quería era ir de frente y sacarme esto de la cabeza.
                 </div>
-                <div class="reply-box">
-                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                <div class="question-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="enviarPaso(event, 2)">
                         <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
-                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 2">
-                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
-                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
-                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <input type="hidden" name="subject" value="Marian completó el Capítulo 2">
+                        <label>Para confirmar que leíste: ¿Sentís que te entiendo cuando te digo esto?</label>
+                        <textarea name="respuesta_2" placeholder="Escribí tu respuesta acá..." required></textarea>
+                        <button type="submit" class="btn-next">Siguiente capítulo ➔</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>
             </div>
 
-            <div class="section-box">
-                <div class="section-title">Por qué sos vos</div>
-                <div class="message-card">
-                    Me pediste que intente apagar lo que siento y que seguramente voy a encontrar a otra. Pero la verdad es que yo no quiero a otra, ni estoy buscando a nadie más. No me interesa si hay un millón de personas ahí afuera, porque con la que me cago de risa, con la que me paso horas jugando y con la que conecto de esta forma única, es con vos. Encajás perfecto en lo que quiero.
+            <div class="step-box" id="step-3">
+                <div class="step-title">Capítulo III: Por qué sos vos</div>
+                <div class="text-content">
+                    Me dijiste alguna vez que pruebe con otra persona o que apague lo que siento. La verdad es que probé hacerme el tonto y no funciona, porque con la única persona con la que me cago de risa jugando, con la que me cuelgo horas hablando y con la que de verdad siento conexión, es con vos. Encajás perfecto en lo que elijo tener al lado mío.
                 </div>
-                <div class="reply-box">
-                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
+                <div class="question-box">
+                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="enviarPaso(event, 3)">
                         <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
-                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 3">
-                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
-                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
-                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
+                        <input type="hidden" name="subject" value="Marian completó el Capítulo 3">
+                        <label>Para confirmar que leíste: Dejale un comentario corto a Ale sobre este capítulo:</label>
+                        <textarea name="respuesta_3" placeholder="Escribí tu respuesta acá..." required></textarea>
+                        <button type="submit" class="btn-next">Ver las 100 razones ➔</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>
             </div>
 
-            <div class="section-box">
-                <div class="section-title">Lo indispensable que sos</div>
-                <div class="message-card">
-                    Es imposible apagar este sentimiento cuando te volviste una persona absolutamente indispensable en mi día a día. Me despierto y ya tengo ganas de ver si me mandaste algo. Disfruto como loco cada charla sin sentido, ayudarte en todo lo que necesites y saber que estás ahí del otro lado. Siento que te conozco un montón.
+        </div>
+
+        <div id="razones-section">
+            <div class="title-love" style="font-size: 3rem; margin-top: 20px;">100 razones por las que me gustás</div>
+            <p style="color: #7a5c61; text-align: center; margin-bottom: 15px;">Tocá cada tarjeta para leer el porqué de cada detalle ✨</p>
+            <div class="razones-grid" id="razones-grid-container">
                 </div>
-                <div class="reply-box">
-                    <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('¡Mensaje enviado a Ale con éxito! 💌');">
-                        <input type="hidden" name="access_key" value="b9fac04f-7f36-4968-8f4e-0fdd37b1afaf">
-                        <input type="hidden" name="subject" value="Respuesta de Marian - Sección 4">
-                        <label style="font-size: 0.9rem; color: #d63384; font-weight: bold;">Dejale un mensaje a Ale:</label>
-                        <textarea name="mensaje" placeholder="Escribí tu respuesta o comentario acá..."></textarea>
-                        <button type="submit" class="btn-send-reply">Enviar respuesta</button>
-                        <div class="clearfix"></div>
-                    </form>
-                </div>
+
+            <div class="decision-box" id="decision-box">
+                <p>Llegaste al final de todo... Quiero que sepas que <strong>no estás para nada obligada a aceptar nada</strong>.<br><br>
+                Mi propuesta sincera es intentar darnos una oportunidad, ser "algo sin ser nada" y dejar que las cosas fluyan. Y si no funciona o te arrepentís, te prometo que nuestra amistad sigue intacta. ❤️</p>
+                
+                <button class="btn-yes" onclick="acceptProposal()">Sí, me animo</button>
+                <button class="btn-no" onclick="declineProposal()">Prefiero que sigamos como amigos</button>
+                <div id="final-key-reveal"></div>
             </div>
-
-            <div class="section-box" style="text-align: center;">
-                <div class="section-title">Detalles especiales</div>
-                <p style="color: #7a5c61; margin-bottom: 20px;">Preparé algo especial para vos. Hacé clic para leerlo:</p>
-                <button class="btn-action" onclick="mostrarRazones()">💖 100 razones por las que me gustás 💖</button>
-
-                <div id="razones-box">
-                    <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; text-align: center; margin-top: 0;">Deslizá hasta el final para leerlas todas ✨</p>
-                    <div class="razones-scroll" id="scroll-razones" onscroll="verificarScrollRazones()">
-                        <ol id="lista-razones"></ol>
-                    </div>
-                </div>
-
-                <div style="margin-top: 25px;">
-                    <button class="btn-action" id="btn-mostrar-cancion" style="display: none;" onclick="mostrarCancion()">🎵 La canción con la que te conocí 🎵</button>
-                </div>
-
-                <div id="cancion-box">
-                    <p style="font-weight: bold; color: #d63384; font-size: 1.2rem; margin-top: 0;">Dale play para escucharla... 🎧</p>
-                    <audio id="audio-cancion" controls style="width: 100%; outline: none;" onended="habilitarPropuesta()">
-                        <source src="Kali Uchis - Muévelo (Letra) actualiza ma actualiza [MYvx_BiRmnY] (1).mp3" type="audio/mpeg">
-                        Tu navegador no soporta reproducción de audio.
-                    </audio>
-                </div>
-
-                <div class="decision-box" id="decision-box">
-                    <p>Llegaste al final de todo esto... Quiero que sepas que <strong>no estás para nada obligada a aceptar nada</strong>.<br><br>
-                    Mi propuesta sincera es intentar darnos una oportunidad, ser "algo sin ser nada" y dejar que las cosas fluyan a su tiempo. Y si no funciona o te arrepentís, te prometo que nuestra amistad de siempre sigue intacta. ❤️</p>
-                    
-                    <button class="btn-yes" onclick="acceptProposal()">Sí, me animo</button>
-                    <button class="btn-no" onclick="declineProposal()">Prefiero que sigamos como amigos</button>
-                    <div id="final-key-reveal"></div>
-                </div>
-            </div>
-
         </div>
 
     </div>
 
     <script>
-        const razonesTexto = [
-            "Por tu risa que me alegra el día al instante.",
-            "Porque hacés que el tiempo pase volando cuando hablamos.",
-            "Por tu forma tan única de ser vos misma.",
-            "Porque jugar con vos es mi momento favorito de la semana.",
-            "Por tus silencios que también me dicen mucho.",
-            "Porque sos súper tierna aunque intentes disimularlo.",
-            "Por cómo te expresás cuando algo te emociona de verdad.",
-            "Porque me encanta escucharte hablar de cualquier cosa.",
-            "Por esa chispa especial que tenés y nadie más tiene.",
-            "Porque sos sincera y vas siempre con la verdad.",
-            "Por la paz inmensa que me transmitís.",
-            "Porque no necesitás fingir nada conmigo.",
-            "Por cómo defendés tus ideas con tanta personalidad.",
-            "Porque sos la primera persona en la que pienso cuando me despierto.",
-            "Por tu buen gusto en canciones.",
-            "Por cada detalle tuyo me parece hermoso.",
-            "Por tus chistes y ocurrencias de la nada.",
-            "Porque me hacés querer ser una mejor versión de mí mismo.",
-            "Por tus audios que escucho más de una vez.",
-            "Porque me bancás incluso con mis momentos intensos.",
-            "Por tu mirada y esa energía tan linda que irradiás.",
-            "Por me enseñás a mirar las cosas de otra forma.",
-            "Por tu forma de caminar y moverte en los juegos.",
-            "Por cómo me cuidás a tu manera.",
-            "Por sos auténtica de pies a cabeza.",
-            "Por la complicidad que tenemos en todo.",
-            "Porque iluminás cualquier día nublado.",
-            "Por tus gustos tan particulares que te hacen única.",
-            "Por me gusta cómo te vestís.",
-            "Por hacerme reír en los peores momentos.",
-            "Porque con vos no me da vergüenza decir lo que pienso.",
-            "Por tu independencia y fortaleza.",
-            "Por me encanta tu sentido del humor.",
-            "Por las madrugadas charlando sin parar.",
-            "Por me hacés sentir en casa cuando hablamos.",
-            "Por tu dulce forma de quejarte de las cosas.",
-            "Por me motivás a dar lo mejor de mí.",
-            "Por esa risa contagiosa que no podés frenar.",
-            "Porque hacés especial cualquier charla simple.",
-            "Por tu carisma natural.",
-            "Por sos mi persona favorita en todo el mundo.",
-            "Por cómo se siente hablar con vos después de un día largo.",
-            "Por qué no hay nadie que se compare a vos.",
-            "Por tu paciencia conmigo.",
-            "Por tenés un corazón enorme.",
-            "Por las mil anécdotas que compartimos.",
-            "Por me hacés sonreír a la pantalla como un tonto.",
-            "Por ser mi mejor compañía a la distancia.",
-            "Por me encanta saber qué estás haciendo.",
-            "Por tu ternura escondida detrás de tu carácter.",
-            "Por tus mensajes me cambian el humor al instante.",
-            "Por cómo brillás con luz propia.",
-            "Por te preocupás por las personas que querés.",
-            "Por tus fotos y cómo salís de linda en todo.",
-            "Por no puedo evitar hablar de vos con una sonrisa.",
-            "Por la conexión instantánea que tuvimos.",
-            "Por me hacés olvidar de todos los problemas.",
-            "Por tu voz, que calma cualquier ansiedad.",
-            "Por sos inteligente y me encanta cómo pensás.",
-            "Por tu forma de ver la vida sin tantas complicaciones.",
-            "Por con vos aprendí a valorar cada momento.",
-            "Por ser mi refugio en los días complicados.",
-            "Por tenés una sensibilidad muy linda.",
-            "Por cómo te esforzás en las cosas que te proponés.",
-            "Por me encanta que me cuentes tu día a día.",
-            "Por tu espontaneidad pura.",
-            "Por sos el motivo de mis mejores pensamientos.",
-            "Por cómo te reís cuando ganamos una partida.",
-            "Por aceptás mis defectos sin juzgarme.",
-            "Por la confianza que logramos construir juntos.",
-            "Por sos linda por dentro y por fuera.",
-            "Por esa forma tan tuya de hacerme sentir especial.",
-            "Por nunca me canso de hablar con vos.",
-            "Por los stickers y memes que mandás.",
-            "Por me gusta compartir mis gustos con vos.",
-            "Por el brillo que le das a mis días.",
-            "Por sos mi casualidad más bonita.",
-            "Por cómo me hacés sentir cuando me decís algo lindo.",
-            "Por con vos las horas parecen segundos.",
-            "Por no rendirte ante las cosas difíciles.",
-            "Por me inspirás ternura y ganas de cuidarte.",
-            "Por tu madurez para hablar de ciertas cosas.",
-            "Por ese lado caprichoso y gracioso que tenés a veces.",
-            "Por me hacés sentir comprendido.",
-            "Por ser ese mensaje que siempre estoy esperando.",
-            "Por tu presencia lo mejora absolutamente todo.",
-            "Por cómo defendés a tus amigos.",
-            "Por sos súper leal.",
-            "Por tus reacciones cuando te digo algo cursi.",
-            "Por me hacés sentir vivo y emocionado cada día.",
-            "Por la magia de tus silencios cómodos.",
-            "Por hacés que jugar a cualquier juego sea divertido.",
-            "Por ser el motor de muchas de mis alegrías.",
-            "Por todo lo que todavía tenemos por vivir juntos.",
-            "Por tu felicidad se convirtió en mi felicidad.",
-            "Por tus expresiones únicas cuando hablamos.",
-            "Por no cambiaría ni un solo segundo de los que pasé con vos.",
-            "Por la simple y maravillosa razón de que sos vos.",
-            "Por mi corazón te elige una y mil veces.",
-            "Por te quiero con todo mi ser, Marian."
+        const razonesDetalladas = [
+            { titulo: "1. Tu risa", detalle: "Porque tu risa me alegra el día al instante, no importa cómo haya empezado." },
+            { titulo: "2. Las charlas", detalle: "Porque hacés que el tiempo pase volando cuando nos ponemos a hablar de cualquier pavada." },
+            { titulo: "3. Tu autenticidad", detalle: "Por tu forma tan única de ser vos misma, sin caretas con nadie." },
+            { titulo: "4. Jugar con vos", detalle: "Porque jugar a lo que sea con vos es mi momento favorito de toda la semana." },
+            { titulo: "5. Tus silencios", detalle: "Por tus silencios cómodos que también me dicen un montón." },
+            { titulo: "6. Tu ternura", detalle: "Porque sos súper tierna aunque intentes disimularlo todo el tiempo." },
+            { titulo: "7. Cómo te expresás", detalle: "Por cómo te brilla la cara o los ojos cuando algo te emociona de verdad." },
+            { titulo: "8. Escucharte hablar", detalle: "Porque me encanta escucharte explicar cualquier cosa, hasta tus enojos." },
+            { titulo: "9. Tu chispa única", detalle: "Por esa chispa especial que tenés y que no encuentro en ninguna otra persona." },
+            { titulo: "10. Tu sinceridad", detalle: "Porque vas siempre con la verdad de frente, sin vueltas raros." },
+            { titulo: "11. La paz que me das", detalle: "Por la tranquilidad inmensa que me transmitís cuando nos ponemos al día." },
+            { titulo: "12. Tu naturalidad", detalle: "Porque no necesitás fingir nada conmigo, sos libre." },
+            { titulo: "13. Tu personalidad", detalle: "Por cómo defendés tus ideas con tanta firmeza y carácter." },
+            { titulo: "14. Mi primer pensamiento", detalle: "Porque sos literal la primera persona en la que pienso al despertarme." },
+            { titulo: "15. Tu buen gusto", detalle: "Por la música y los temas copados que siempre traes a la charla." },
+            { titulo: "16. Cada detalle tuyo", detalle: "Porque hasta el más mínimo detalle tuyo me parece hermoso." },
+            { titulo: "17. Tus ocurrencias", detalle: "Por tus chistes repentinos que me tiran abajo el humor serio." },
+            { titulo: "18. Tu inspiración", detalle: "Porque me hacés querer ser una mejor versión de mí mismo todos los días." },
+            { titulo: "19. Tus audios", detalle: "Por tus audios largos que los escucho más de una vez porque me da gracia." },
+            { titulo: "20. Me bancás", detalle: "Porque me bancás incluso en mis días más intensos y densos." },
+            { titulo: "21. Tu energía", detalle: "Por tu mirada y esa vibra tan linda que irradiás." },
+            { titulo: "22. Tu perspectiva", detalle: "Porque me enseñás a mirar las cosas desde un ángulo totalmente distinto." },
+            { titulo: "23. Cómo te manejás", detalle: "Por tu forma de caminar y moverte en los juegos o en la vida." },
+            { titulo: "24. Tu forma de cuidar", detalle: "Por cómo me cuidás a tu manera tan particular." },
+            { titulo: "25. Tu esencia", detalle: "Porque sos auténtica de pies a cabeza." },
+            { titulo: "26. Nuestra complicidad", detalle: "Por la complicidad gigante que armamos para todo." },
+            { titulo: "27. Iluminás todo", detalle: "Porque iluminás cualquier día gris con solo mandar un mensaje." },
+            { titulo: "28. Tus gustos", detalle: "Por tus gustos tan particulares que te hacen re diferente." },
+            { titulo: "29. Cómo te vestís", detalle: "Porque siempre me gusta ver las fotos de cómo te vestís." },
+            { titulo: "30. Risas en malos momentos", detalle: "Por sacarme una sonrisa cuando estoy re podrido de todo." },
+            { titulo: "31. Cero vergüenza", detalle: "Porque con vos no me da miedo decir ninguna estupidez." },
+            { titulo: "32. Tu independencia", detalle: "Por tu fortaleza y lo bien que te manejás sola." },
+            { titulo: "33. Tu humor", detalle: "Porque me encanta tu sentido del humor ácido y gracioso." },
+            { titulo: "34. Madrugadas", detalle: "Por las madrugadas enteras charlando sin darnos cuenta de la hora." },
+            { titulo: "35. Sentirme en casa", detalle: "Porque hablar con vos se siente exactamente igual a estar en casa." },
+            { titulo: "36. Tus quejas", detalle: "Por tu forma tan tierna y graciosa de quejarte de las cosas." },
+            { titulo: "37. Me motivás", detalle: "Porque me motivás a dar siempre un poquito más." },
+            { titulo: "38. Tu risa contagiosa", detalle: "Por esa risa que te agarra y que no podés frenar más." },
+            { titulo: "39. Charlas simples", detalle: "Porque hacés épica cualquier charla de cinco minutos." },
+            { titulo: "40. Tu carisma", detalle: "Por ese carisma natural que tenés con la gente." },
+            { titulo: "41. Sos mi favorita", detalle: "Porque te convertiste en mi persona favorita en todo el mundo." },
+            { titulo: "42. Después del laburo", detalle: "Por lo lindo que se siente hablar con vos después de un día largo." },
+            { titulo: "43. Sos inigualable", detalle: "Porque no hay nadie que se compare ni un poquito a vos." },
+            { titulo: "44. Tu paciencia", detalle: "Por aguantar mis manías y mi locura constante." },
+            { titulo: "45. Tu corazón", detalle: "Porque tenés un corazón enorme aunque a veces te hagas la mala." },
+            { titulo: "46. Nuestras anécdotas", detalle: "Por todas las risas y boludeces que ya compartimos." },
+            { titulo: "47. Me sonrojás", detalle: "Porque me hacés sonreír a la pantalla como un tonto." },
+            { titulo: "48. Compañía a distancia", detalle: "Por ser la mejor compañía que se puede tener a la distancia." },
+            { titulo: "49. Qué estás haciendo", detalle: "Porque genuinamente me encanta saber en qué andás." },
+            { titulo: "50. Tu carita enojona", detalle: "Por la ternura que me da cuando te ponés firme con algo." },
+            { titulo: "51. Cambiás mi humor", detalle: "Porque tus mensajes me cambian el día al instante." },
+            { titulo: "52. Brillás sola", detalle: "Por cómo destacás en todo lo que hacés." },
+            { titulo: "53. Defendés a los tuyos", detalle: "Por el amor y la lealtad con la que defendés a los que querés." },
+            { titulo: "54. Tus fotos", detalle: "Porque cada vez que me mandás una foto me alegro el día." },
+            { titulo: "55. Una sonrisa sola", detalle: "Porque no puedo evitar sonreír cuando veo tu nombre en el celu." },
+            { titulo: "56. Nuestra conexión", detalle: "Por la conexión instantánea que pegamos desde el primer día." },
+            { titulo: "57. Olvido los problemas", detalle: "Porque con vos me olvido de cualquier mambo o problema." },
+            { titulo: "58. Tu voz", detalle: "Por tu voz, que tiene el poder de calmarme por completo." },
+            { titulo: "59. Tu cabeza", detalle: "Porque sos hiper inteligente y me fascina cómo razonás." },
+            { titulo: "60. Tu simpleza", detalle: "Por ver la vida sin enroscarte de más." },
+            { titulo: "61. Valorar el momento", detalle: "Porque con vos aprendí a disfrutar de las pequeñas cosas." },
+            { titulo: "62. Mi refugio", detalle: "Por ser el lugar al que quiero ir cuando estoy cansado." },
+            { titulo: "63. Tu sensibilidad", detalle: "Porque tenés una sensibilidad re linda y profunda." },
+            { titulo: "64. Tu esfuerzo", detalle: "Por cómo le metés a las cosas que te proponen." },
+            { titulo: "65. Tu rutina", detalle: "Porque me encanta que me cuentes lo que hiciste en tu día." },
+            { titulo: "66. Tu espontaneidad", detalle: "Por lo espontánea y natural que sos siempre." },
+            { titulo: "67. Mis pensamientos", detalle: "Porque sos la dueña de mis mejores pensamientos." },
+            { titulo: "68. Ganar con vos", detalle: "Por cómo festejamos cuando ganamos partidas juntos." },
+            { titulo: "69. Me aceptás", detalle: "Porque aceptás mis defectos sin andar juzgándome." },
+            { titulo: "70. Lo que construimos", detalle: "Por la confianza hermosa que logramos armar." },
+            { titulo: "71. Linda por dentro y fuera", detalle: "Porque sos hermosa por fuera, pero por dentro mil veces más." },
+            { titulo: "72. Me hacés especial", detalle: "Por esa forma tuya de hacerme sentir que valgo la pena." },
+            { titulo: "73. Vicio de hablarte", detalle: "Porque nunca, literal nunca, me canso de hablar con vos." },
+            { titulo: "74. Tus stickers", detalle: "Por los stickers y los memes que mandás que me matan de risa." },
+            { titulo: "75. Compartir gustos", detalle: "Porque me encanta cuando coincidimos en gustos o manías." },
+            { titulo: "76. El brillo en mis días", detalle: "Por ser el solcito de mis semanas." },
+            { titulo: "77. Mi casualidad", detalle: "Porque sos la casualidad más hermosa que me cruzó la vida." },
+            { titulo: "78. Cosas lindas", detalle: "Por cómo me ponés cuando me tirás un centro lindo." },
+            { titulo: "79. Horas cortas", detalle: "Porque con vos las horas duran dos minutos." },
+            { titulo: "80. No aflojás", detalle: "Por tu actitud de seguir adelante ante los recovecos difíciles." },
+            { titulo: "81. Ganas de cuidarte", detalle: "Porque me das una ternura tremenda y ganas de cuidarte." },
+            { titulo: "82. Tu madurez", detalle: "Por la madurez con la que encarás temas grosos." },
+            { titulo: "83. Tu lado caprichoso", detalle: "Por ese lado caprichoso y terco que me da risa y ternura." },
+            { titulo: "84. Me comprendés", detalle: "Porque siento que me entendés como nadie más lo hace." },
+            { titulo: "85. El mensaje esperado", detalle: "Por ser siempre la notificación que más me alegra ver." },
+            { titulo: "86. Todo mejora", detalle: "Porque tu sola presencia mejora cualquier panorama." },
+            { titulo: "87. Súper leal", detalle: "Porque sos de las pocas personas hiper leales que existen." },
+            { titulo: "88. Cuando te ponés cursi", detalle: "Por tus reacciones hermosas cuando me pongo tierno." },
+            { titulo: "89. Vivo emocionado", detalle: "Porque me hacés sentir vivo y con ganas de hacer planes." },
+            { titulo: "90. Silencios cómodos", detalle: "Por la magia de estar en llamada sin hablar y estar bien." },
+            { titulo: "91. Diversión garantizada", detalle: "Porque jugemos al juego que jugemos, la pasé joya." },
+            { titulo: "92. Motor de alegría", detalle: "Por ser el motor de gran parte de mis alegrías actuales." },
+            { titulo: "93. Lo que falta", detalle: "Por todo lo lindo que sé que todavía nos falta vivir." },
+            { titulo: "94. Tu felicidad", detalle: "Porque verte contenta se convirtió en mi propia felicidad." },
+            { titulo: "95. Tus expresiones", detalle: "Por tus gestos y caras únicas cuando charlamos." },
+            { titulo: "96. No cambiaría nada", detalle: "Porque no cambiaría ni un solo segundo de lo que compartimos." },
+            { titulo: "97. Sos vos y punto", detalle: "Por la simple, única y maravillosa razón de que sos vos." },
+            { titulo: "98. Te elijo", detalle: "Porque mi corazón te elige una y mil veces sin dudarlo." },
+            { titulo: "99. Mi cariño", detalle: "Porque te quiero con toda el alma y de una forma genuina." },
+            { titulo: "100. Te adoro", detalle: "Porque me muero de ganas de hacerte feliz todos los días." }
         ];
 
-        function cargarRazones() {
-            const lista = document.getElementById("lista-razones");
-            lista.innerHTML = "";
-            razonesTexto.forEach((razon) => {
-                const li = document.createElement("li");
-                li.innerText = razon;
-                lista.appendChild(li);
+        function enviarPaso(event, pasoNum) {
+            event.preventDefault();
+            const form = event.target;
+            
+            // Envía por API (Web3Forms)
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form)
+            }).then(response => {
+                if(response.ok) {
+                    alert("¡Respuesta enviada a Ale con éxito! 💌");
+                    document.getElementById('step-' + pasoNum).classList.remove('active');
+                    
+                    if(pasoNum < 3) {
+                        document.getElementById('step-' + (pasoNum + 1)).classList.add('active');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        // Mostrar las 100 razones
+                        document.getElementById('razones-section').style.display = 'block';
+                        generarRazones();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                } else {
+                    alert("Hubo un error al enviar, pero podés avanzar igual.");
+                }
+            }).catch(() => {
+                // Si falla el fetch por CORS, avanza igual para no trabarla
+                alert("¡Gracias por responder! Avanzando...");
+                document.getElementById('step-' + pasoNum).classList.remove('active');
+                if(pasoNum < 3) {
+                    document.getElementById('step-' + (pasoNum + 1)).classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    document.getElementById('razones-section').style.display = 'block';
+                    generarRazones();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             });
         }
 
-        function mostrarRazones() {
-            const box = document.getElementById("razones-box");
-            box.style.display = "block";
-            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        function generarRazones() {
+            const grid = document.getElementById('razones-grid-container');
+            grid.innerHTML = "";
+            razonesDetalladas.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'razon-card';
+                card.innerHTML = `<span>${item.titulo}</span> <small style="color:#d63384;">(Tocá para leer)</small>`;
+                card.onclick = () => {
+                    card.style.background = "#ffe6ea";
+                    card.innerHTML = `<span style="color:#333; font-weight:normal;">${item.detalle}</span>`;
+                };
+                grid.appendChild(card);
+            });
 
-        function verificarScrollRazones() {
-            const scrollDiv = document.getElementById("scroll-razones");
-            if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight - 20) {
-                const btnCancion = document.getElementById("btn-mostrar-cancion");
-                btnCancion.style.display = "inline-block";
-            }
-        }
-
-        function mostrarCancion() {
-            const cancionBox = document.getElementById("cancion-box");
-            cancionBox.style.display = "block";
-            cancionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
+            // Mostrar caja de decisión al final de las razones
             setTimeout(() => {
                 document.getElementById('decision-box').style.display = 'block';
-            }, 1000);
-        }
-
-        function habilitarPropuesta() {
-            document.getElementById('decision-box').style.display = 'block';
-            document.getElementById('decision-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 2000);
         }
 
         function acceptProposal() {
@@ -520,8 +529,6 @@
             revealBox.style.background = "#f0f0f0";
             revealBox.innerHTML = "Entiendo y respeto totalmente tu respuesta. De verdad, no pasa nada y me alegra mucho habértelo dicho con sinceridad. Gracias por tomarte el tiempo de leer todo esto. ¡Te quiero un montón y nuestra amistad sigue intacta siempre! ❤️";
         }
-
-        cargarRazones();
     </script>
 </body>
 </html>
